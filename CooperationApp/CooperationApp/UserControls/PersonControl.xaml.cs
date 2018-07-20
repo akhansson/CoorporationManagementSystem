@@ -25,13 +25,19 @@ namespace CooperationApp.UserControls
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void savePersonButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(nameTexbox.Text) && !string.IsNullOrWhiteSpace(companyCombobox.Text))
+            if (string.IsNullOrWhiteSpace(nameTexbox.Text))
             {
-                Console.Beep();
+                MessageBox.Show("Could not add the person to the database. You have to provide a name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
+            else
+            {
+                if (companyCombobox.SelectedItem != null)
+                {
+                    MessageBox.Show(companyCombobox.SelectedItem.ToString());
+                }
+            }
         }
     }
 }
