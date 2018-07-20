@@ -23,5 +23,12 @@ namespace CooperationApp.People
             FullName = fullName;
             Company = company;
         }
+
+        public void Unemploy(Person person)
+        {
+            person.Company = null;
+        }
+
+        
     }
 }
