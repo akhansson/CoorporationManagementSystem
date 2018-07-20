@@ -23,6 +23,9 @@
             <TabItem Header="Company">
                 <uc:CompanyControl/>
             </TabItem>
+            <TabItem Header="Unemployed People">
+                
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

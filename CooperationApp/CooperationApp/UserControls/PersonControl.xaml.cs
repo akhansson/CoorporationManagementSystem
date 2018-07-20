@@ -24,5 +24,14 @@ namespace CooperationApp.UserControls
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(nameTexbox.Text) && !string.IsNullOrWhiteSpace(companyCombobox.Text))
+            {
+                Console.Beep();
+            }
+
+        }
     }
 }

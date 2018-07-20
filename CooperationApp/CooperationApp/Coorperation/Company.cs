@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace CooperationApp.Coorperation
 {
-    class Company
+    public class Company
     {
-        public string CompanyName { get; set; }
+        public string CompanyName { get; private set; }
+
+        public Company(string companyName)
+        {
+            CompanyName = companyName;
+        }
     }
 }
