@@ -20,7 +20,9 @@
             <TabItem Header="Person">
                 <uc:PersonControl/>
             </TabItem>
-            <TabItem Header="Company"/>
+            <TabItem Header="Company">
+                <uc:CompanyControl/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
