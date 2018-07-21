@@ -47,6 +47,7 @@ namespace CooperationApp.UserControls
             }
         }
 
+
         private void isEmployedCheckbox_Checked(object sender, RoutedEventArgs e)
         {
             if (!companyCombobox.HasItems)
