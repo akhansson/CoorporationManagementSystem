@@ -58,6 +58,15 @@ namespace CooperationApp.Data
             }
         }
 
+        public List<Person> GetAllPeople()
+        {
+            using (var personConnection = CreateConnection())
+            {
+                personConnection.CreateTable<Person>();
+                return personConnection.Table<Person>().ToList();
+            }
+        }
+
         private SQLiteConnection CreateConnection()
         {
             return new SQLiteConnection(_databasePath);

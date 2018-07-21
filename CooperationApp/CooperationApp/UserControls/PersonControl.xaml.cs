@@ -27,9 +27,10 @@ namespace CooperationApp.UserControls
 
         public PersonControl()
         {
+            _companyService = new CompanyService();
+
             InitializeComponent();
 
-            _companyService = new CompanyService();
         }
 
         private void savePersonButton_Click(object sender, RoutedEventArgs e)

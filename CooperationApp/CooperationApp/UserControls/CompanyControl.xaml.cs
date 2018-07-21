@@ -29,12 +29,9 @@ namespace CooperationApp.UserControls
 
         public CompanyControl()
         {
-            InitializeComponent();
-
-            ReadCompanyDatabase();
-
             _companyService = new CompanyService();
 
+            InitializeComponent();
         }
 
         private void saveCompanyButton_Click(object sender, RoutedEventArgs e)
@@ -100,6 +97,11 @@ namespace CooperationApp.UserControls
         {
             var companiesWindow = new DisplayCompanies();
             companiesWindow.ShowDialog();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ReadCompanyDatabase();
         }
     }
 }

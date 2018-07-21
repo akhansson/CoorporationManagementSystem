@@ -26,7 +26,14 @@ namespace CooperationApp.Services
 
         }
 
+        public void AddPerson(Person person)
+        {
+            ValidatePerson(person);
 
+            _companyRepository.AddPerson(person);
+        }
+
+        
         private static void ValidateCompany(Company company)
         {
             // Outputs an error if the company name provided is null or an empty string or empty characters
@@ -42,9 +49,19 @@ namespace CooperationApp.Services
             }
         }
 
+        private void ValidatePerson(Person person)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Company> GetAllCompanies()
         {
             return _companyRepository.GetAllCompanies();
+        }
+
+        public List<Person> GetAllPeople()
+        {
+            return _companyRepository.GetAllPeople();
         }
     }
 }

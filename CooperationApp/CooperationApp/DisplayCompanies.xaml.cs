@@ -25,10 +25,10 @@ namespace CooperationApp
 
         public DisplayCompanies()
         {
+            _companyService = new CompanyService();
             InitializeComponent();
             ReadCompanyDatabase();
 
-            _companyService = new CompanyService();
 
         }
 
