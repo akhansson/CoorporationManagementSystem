@@ -18,7 +18,8 @@ namespace CooperationApp.Data
 
         public CompanyRepository()
         {
-            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var folderPath = "";
             _databasePath = System.IO.Path.Combine(folderPath, DATABASE_NAME);
         }
 

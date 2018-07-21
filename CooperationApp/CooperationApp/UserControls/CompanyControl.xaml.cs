@@ -36,11 +36,6 @@ namespace CooperationApp.UserControls
 
         private void saveCompanyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(companyNameTexbox.Text))
-            {
-                MessageBox.Show("You didn't write anything in the field!", "Error: No company name written", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
             try
             {
                 // Create a Company object
@@ -48,7 +43,9 @@ namespace CooperationApp.UserControls
                 {
                     CompanyName = companyNameTexbox.Text
                 });
-                ReadCompanyDatabase();
+                companyNameTexbox.Text = null;
+                DisplayCompanyAmount();
+                
             }
             catch (ArgumentException ex)
             {
@@ -87,7 +84,7 @@ namespace CooperationApp.UserControls
 
 
 
-        public void ReadCompanyDatabase()
+        public void DisplayCompanyAmount()
         {
             var companies = _companyService.GetAllCompanies();
 
@@ -102,7 +99,7 @@ namespace CooperationApp.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ReadCompanyDatabase();
+            DisplayCompanyAmount();
         }
     }
 }

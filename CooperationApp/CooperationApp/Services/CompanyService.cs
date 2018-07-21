@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CooperationApp.Services
 {
@@ -24,6 +25,7 @@ namespace CooperationApp.Services
 
             _companyRepository.AddCompany(company);
 
+            MessageBox.Show("Company sucessfully added!", "Company added", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void AddPerson(Person person)
@@ -39,13 +41,13 @@ namespace CooperationApp.Services
             // Outputs an error if the company name provided is null or an empty string or empty characters
             if (string.IsNullOrWhiteSpace(company.CompanyName))
             {
-                throw new ArgumentException("You didn't write anything in the field!", "Error: No company name written");
+                throw new ArgumentException("You didn't write a company name!", "Error: Whitespace or empty field");
             }
 
             // This code runs if the company name provided is composed of letters. No other characters are accepted.
             if (!Regex.IsMatch(company.CompanyName, @"^[A-Za-zÅÄÖåäö ]+$"))
             {
-                throw new ArgumentException("You should only provide letters in the company name. No other characters are supported!");
+                throw new ArgumentException("You can only write letters and spaces!");
             }
         }
 
