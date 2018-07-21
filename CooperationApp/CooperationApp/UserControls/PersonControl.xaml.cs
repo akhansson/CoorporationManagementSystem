@@ -27,6 +27,12 @@ namespace CooperationApp.UserControls
 
         private void savePersonButton_Click(object sender, RoutedEventArgs e)
         {
+            if (isEmployedCheckbox.IsChecked == true && companyCombobox.HasItems)
+            {
+                MessageBox.Show($"{nameTexbox.Text} works at {companyCombobox.Text}");
+            }
+
+
             if (string.IsNullOrWhiteSpace(nameTexbox.Text))
             {
                 MessageBox.Show("Could not add the person to the database. You have to provide a name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -43,7 +49,15 @@ namespace CooperationApp.UserControls
 
         private void isEmployedCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            companyCombobox.IsEnabled = true;
+            if (!companyCombobox.HasItems)
+            {
+                MessageBox.Show("There are no companies registered. Register a company in the company tab first if you plan to add the person to a company.", "No companies in the database", MessageBoxButton.OK, MessageBoxImage.Error);
+                isEmployedCheckbox.IsChecked = false;
+            }
+            else
+            {
+                companyCombobox.IsEnabled = true;
+            }
         }
 
         private void isEmployedCheckbox_Unchecked(object sender, RoutedEventArgs e)

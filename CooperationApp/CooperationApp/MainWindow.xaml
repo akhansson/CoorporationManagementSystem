@@ -7,7 +7,8 @@
         xmlns:uc="clr-namespace:CooperationApp.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        MinHeight="450" MinWidth="800">
+        MinHeight="450" MinWidth="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,15 +19,19 @@
 
         <TabControl VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
+            
             <TabItem Header="Person">
                 <uc:PersonControl/>
             </TabItem>
+            
             <TabItem Header="Company">
                 <uc:CompanyControl/>
             </TabItem>
+            
             <TabItem Header="Unemployed People">
                 <uc:UnemployedControl/>
             </TabItem>
+            
         </TabControl>
     </Grid>
 </Window>

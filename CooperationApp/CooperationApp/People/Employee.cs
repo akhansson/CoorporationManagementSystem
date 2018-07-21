@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace CooperationApp.People
 {
-    public class Person
+    class Employee : Person
     {
-        public string FullName { get; private set; }
+        public Company CompanyName { get; set; }
 
-        public Person(string fullName)
+        public Employee(string fullName, Company companyName)
+            :base(fullName)
         {
-            FullName = fullName;
+            CompanyName = companyName;
         }
     }
 }
