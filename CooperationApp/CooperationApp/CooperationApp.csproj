@@ -80,7 +80,6 @@
     <Compile Include="DisplayCompanies.xaml.cs">
       <DependentUpon>DisplayCompanies.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ICompanyDatabase.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="UserControls\CompanyControl.xaml.cs">

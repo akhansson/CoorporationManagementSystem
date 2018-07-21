@@ -19,16 +19,16 @@ namespace CooperationApp
     /// <summary>
     /// Interaction logic for DisplayCompanies.xaml
     /// </summary>
-    public partial class DisplayCompanies : Window, ICompanyDatabase
+    public partial class DisplayCompanies : Window
     {
         private CompanyService _companyService;
 
         public DisplayCompanies()
         {
+            _companyService = new CompanyService();
             InitializeComponent();
             ReadCompanyDatabase();
 
-            _companyService = new CompanyService();
 
         }
 

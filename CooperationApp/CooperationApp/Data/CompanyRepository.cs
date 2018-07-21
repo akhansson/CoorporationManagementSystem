@@ -18,7 +18,8 @@ namespace CooperationApp.Data
 
         public CompanyRepository()
         {
-            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var folderPath = "";
             _databasePath = System.IO.Path.Combine(folderPath, DATABASE_NAME);
         }
 
@@ -55,6 +56,15 @@ namespace CooperationApp.Data
             {
                 companyConnection.CreateTable<Company>();
                 return companyConnection.Table<Company>().ToList();
+            }
+        }
+
+        public List<Person> GetAllPeople()
+        {
+            using (var personConnection = CreateConnection())
+            {
+                personConnection.CreateTable<Person>();
+                return personConnection.Table<Person>().ToList();
             }
         }
 

@@ -9,9 +9,31 @@
         MinWidth="400" MaxWidth="600"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Search: "/>
+            <TextBox VerticalAlignment="Center"
+                     Width="150"/>
+            <Button x:Name="deleteCompanyButton"
+                    VerticalAlignment="Center"
+                    Content="Delete company"
+                    Margin="10 0 0 0"/>
+        </StackPanel>
+        
+        
+        
         <ListView x:Name="companiesListView"
-                  Background="#FFFFE793">
-            
+                  Background="GhostWhite"
+                  Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Company name"/>
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </Window>
