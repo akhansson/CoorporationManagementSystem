@@ -36,8 +36,19 @@ namespace CooperationApp.UserControls
                 if (companyCombobox.SelectedItem != null)
                 {
                     MessageBox.Show(companyCombobox.SelectedItem.ToString());
+                    
                 }
             }
+        }
+
+        private void isEmployedCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            companyCombobox.IsEnabled = true;
+        }
+
+        private void isEmployedCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            companyCombobox.IsEnabled = false;
         }
     }
 }
