@@ -30,11 +30,11 @@ namespace CooperationApp.UserControls
             _companyService = new CompanyService();
 
             InitializeComponent();
-
         }
 
         private void savePersonButton_Click(object sender, RoutedEventArgs e)
         {
+            ReadCompanyDatabase();
             //// Outputting an error message if no name was provided or white spaces
             //if (string.IsNullOrWhiteSpace(nameTexbox.Text))
             //{
@@ -57,7 +57,7 @@ namespace CooperationApp.UserControls
             //        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             //        string databasePath = System.IO.Path.Combine(folderPath, databaseName);
 
-                    
+
             //    }
             //    // If the company checkbox is checked
             //    else
@@ -77,6 +77,18 @@ namespace CooperationApp.UserControls
             //}
         }
 
+        public void ReadCompanyDatabase()
+        {
+            var companies = _companyService.GetAllCompanies();
+
+            foreach (var company in companies)
+            {
+                companyCombobox.Items.Add(new ComboBoxItem()
+                {
+                    Content = company.CompanyName
+                });
+            }
+        }
 
         private void isEmployedCheckbox_Checked(object sender, RoutedEventArgs e)
         {

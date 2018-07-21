@@ -48,6 +48,7 @@ namespace CooperationApp.UserControls
                 {
                     CompanyName = companyNameTexbox.Text
                 });
+                ReadCompanyDatabase();
             }
             catch (ArgumentException ex)
             {

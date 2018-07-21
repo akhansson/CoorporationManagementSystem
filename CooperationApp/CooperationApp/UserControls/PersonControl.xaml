@@ -65,7 +65,7 @@
                           IsEnabled="False"/>
 
                 <Button x:Name="savePersonButton"
-                        Content="Save"
+                        Content="Add new person"
                         Grid.Column="1"
                         Grid.Row="3"
                         Margin="0 50"
