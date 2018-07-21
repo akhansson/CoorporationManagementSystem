@@ -23,7 +23,7 @@ namespace CooperationApp.UserControls
     /// <summary>
     /// Interaction logic for CompanyControl.xaml
     /// </summary>
-    public partial class CompanyControl : UserControl, ICompanyDatabase
+    public partial class CompanyControl : UserControl
     {
         private CompanyService _companyService;
 

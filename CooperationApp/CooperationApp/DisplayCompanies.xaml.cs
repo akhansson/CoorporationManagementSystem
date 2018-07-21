@@ -1,5 +1,4 @@
-﻿using CooperationApp.Coorperation;
-using CooperationApp.Services;
+﻿using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace CooperationApp
     /// <summary>
     /// Interaction logic for DisplayCompanies.xaml
     /// </summary>
-    public partial class DisplayCompanies : Window, ICompanyDatabase
+    public partial class DisplayCompanies : Window
     {
         private CompanyService _companyService;
 
