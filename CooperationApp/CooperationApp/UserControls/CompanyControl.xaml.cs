@@ -25,9 +25,12 @@ namespace CooperationApp.UserControls
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void saveCompanyButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.Beep();
+            if (string.IsNullOrWhiteSpace(companyNameTexbox.Text))
+            {
+                MessageBox.Show("You didn't write anything in the field!", "Error: No company name written", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -43,7 +43,7 @@
 
                 <Label Grid.Column="0"
                        Content="Company name: "/>
-                <TextBox x:Name="nameTexbox"
+                <TextBox x:Name="companyNameTexbox"
                          Grid.Column="1"/>
 
                 <Button x:Name="saveCompanyButton"
@@ -53,7 +53,7 @@
                         Margin="0 10"
                         Height="30"
                         HorizontalAlignment="Stretch"
-                        Click="Button_Click"/>
+                        Click="saveCompanyButton_Click"/>
             </Grid>
         </StackPanel>
         
