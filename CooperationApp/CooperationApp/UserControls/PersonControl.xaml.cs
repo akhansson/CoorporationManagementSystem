@@ -1,4 +1,5 @@
 ﻿using CooperationApp.People;
+using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,13 @@ namespace CooperationApp.UserControls
     /// </summary>
     public partial class PersonControl : UserControl
     {
+        private CompanyService _companyService;
+
         public PersonControl()
         {
             InitializeComponent();
+
+            _companyService = new CompanyService();
         }
 
         private void savePersonButton_Click(object sender, RoutedEventArgs e)

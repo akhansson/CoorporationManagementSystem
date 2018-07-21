@@ -1,4 +1,7 @@
 ﻿using CooperationApp.Coorperation;
+using CooperationApp.Data;
+using CooperationApp.Models;
+using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -23,80 +26,73 @@ namespace CooperationApp.UserControls
     /// </summary>
     public partial class CompanyControl : UserControl, ICompanyDatabase
     {
-        // The path of the database
-        static string databaseName = "Companies.db";
-        static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string databasePath = System.IO.Path.Combine(folderPath, databaseName);
+        private CompanyService _companyService;
 
         public CompanyControl()
         {
             InitializeComponent();
 
             ReadCompanyDatabase();
+
+            _companyService = new CompanyService();
+
         }
 
         private void saveCompanyButton_Click(object sender, RoutedEventArgs e)
         {
-            // Outputs an error if the company name provided is null or an empty string or empty characters
             if (string.IsNullOrWhiteSpace(companyNameTexbox.Text))
             {
                 MessageBox.Show("You didn't write anything in the field!", "Error: No company name written", MessageBoxButton.OK, MessageBoxImage.Error);
-                companyNameTexbox.Text = null;
             }
-            // This code runs if the company name provided is composed of letters. No other characters are accepted.
-            else if (Regex.IsMatch(companyNameTexbox.Text, @"^[A-Za-zÅÄÖåäö ]+$"))
-            {
-                // Execute if companyNameTextbox.Text isn't found in the database
-                if (true)
-                {
-                    // Create a Company object
-                    Company company = new Company()
-                    {
-                        CompanyName = companyNameTexbox.Text
-                    };
 
-                    WriteCompanyDatabase(company);
-
-                    companyNameTexbox.Text = null;
-                    ReadCompanyDatabase();
-                }
-                // Execute if companyNameTextbox.Text is found in the database. Display error message!
-                else
-                {
-                    MessageBox.Show("The company already exists in the company database.", "Error: Company already exists", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
+            try
             {
-                MessageBox.Show("Error: You should only provide letters in the company name. No other characters are supported!", "Non letter characters were provided", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Create a Company object
+                _companyService.AddCompany(new Company()
+                {
+                    CompanyName = companyNameTexbox.Text
+                });
             }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+            //// Outputs an error if the company name provided is null or an empty string or empty characters
+            //if (string.IsNullOrWhiteSpace(companyNameTexbox.Text))
+            //{
+            //    MessageBox.Show("You didn't write anything in the field!", "Error: No company name written", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    companyNameTexbox.Text = null;
+            //}
+            //// This code runs if the company name provided is composed of letters. No other characters are accepted.
+            //else if (Regex.IsMatch(companyNameTexbox.Text, @"^[A-Za-zÅÄÖåäö ]+$"))
+            //{
+            //    // Execute if companyNameTextbox.Text isn't found in the database
+            //    if (true)
+            //    {
+
+
+            //        companyNameTexbox.Text = null;
+            //        ReadCompanyDatabase();
+            //    }
+            //    // Execute if companyNameTextbox.Text is found in the database. Display error message!
+            //    else
+            //    {
+            //        MessageBox.Show("The company already exists in the company database.", "Error: Company already exists", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Error: You should only provide letters in the company name. No other characters are supported!", "Non letter characters were provided", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
         }
 
 
-
-        // Inserts a Company object to the database
-        private void WriteCompanyDatabase(Company company)
-        {
-            // Initialize the SQLite connection
-            // The "using" statement takes care of closing the connection"
-            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
-            {
-                // Create a table of the type Person
-                connection.CreateTable<Company>();
-                // Insert the person object that was created when the save button was clicked into the SQLite table.
-                connection.Insert(company);
-            }
-        }
 
         public void ReadCompanyDatabase()
         {
-            List<Company> companies;
-
-            using (SQLiteConnection companyConnection = new SQLiteConnection(databasePath))
-            {
-                companyConnection.CreateTable<Company>();
-                companies = companyConnection.Table<Company>().ToList();
-            }
+            var companies = _companyService.GetAllCompanies();
 
             companyAmountLabel.Content = $"{companies.Count} companies in the database";
         }

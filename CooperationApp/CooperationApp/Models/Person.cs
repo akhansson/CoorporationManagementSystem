@@ -1,12 +1,6 @@
-﻿using CooperationApp.Coorperation;
-using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SQLite;
 
-namespace CooperationApp.People
+namespace CooperationApp.Models
 {
     public class Person
     {

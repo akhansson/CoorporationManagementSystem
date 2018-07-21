@@ -1,4 +1,5 @@
 ﻿using CooperationApp.Coorperation;
+using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -21,36 +22,27 @@ namespace CooperationApp
     /// </summary>
     public partial class DisplayCompanies : Window, ICompanyDatabase
     {
-        // The path of the database
-        static string databaseName = "Companies.db";
-        static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string databasePath = System.IO.Path.Combine(folderPath, databaseName);
+        private CompanyService _companyService;
 
         public DisplayCompanies()
         {
             InitializeComponent();
             ReadCompanyDatabase();
+
+            _companyService = new CompanyService();
+
         }
 
         public void ReadCompanyDatabase()
         {
-            List<Company> companies;
+            var companies = _companyService.GetAllCompanies();
 
-            using (SQLiteConnection companyConnection = new SQLiteConnection(databasePath))
+            foreach (var company in companies)
             {
-                companyConnection.CreateTable<Company>();
-                companies = companyConnection.Table<Company>().ToList();
-            }
-
-            if (companies != null)
-            {
-                foreach (var company in companies)
+                companiesListView.Items.Add(new ListViewItem()
                 {
-                    companiesListView.Items.Add(new ListViewItem()
-                    {
-                        Content = company.CompanyName
-                    });
-                }
+                    Content = company.CompanyName
+                });
             }
         }
     }

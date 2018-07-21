@@ -71,12 +71,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Coorperation\Company.cs" />
+    <Compile Include="Data\CompanyRepository.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="DisplayCompanies.xaml.cs">
       <DependentUpon>DisplayCompanies.xaml</DependentUpon>
     </Compile>
     <Compile Include="ICompanyDatabase.cs" />
-    <Compile Include="People\Person.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Services\CompanyService.cs" />
     <Compile Include="UserControls\CompanyControl.xaml.cs">
       <DependentUpon>CompanyControl.xaml</DependentUpon>
     </Compile>
