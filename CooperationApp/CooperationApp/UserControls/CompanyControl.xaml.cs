@@ -35,14 +35,14 @@ namespace CooperationApp.UserControls
                 MessageBox.Show("You didn't write anything in the field!", "Error: No company name written", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             // This code runs if the company name provided is composed of letters. No other characters are accepted.
-            else if (Regex.IsMatch(companyNameTexbox.Text, @"^[a-zA-Z]+$"))
+            else if (Regex.IsMatch(companyNameTexbox.Text, @"^[A-Za-zÅÄÖåäö ]+$"))
             {
                 // Create a Company object
                 Company person = new Company()
                 {
                     CompanyName = companyNameTexbox.Text
                 };
-
+                companyNameTexbox.Text = null;
             }
             else
             {
