@@ -35,7 +35,7 @@ namespace CooperationApp.UserControls
             {
                 MessageBox.Show("Could not add the person to the database. You have to provide a name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else if (Regex.IsMatch(nameTexbox.Text, @"^[a-zA-Z]+$"))
+            else if (Regex.IsMatch(nameTexbox.Text, @"^[A-Za-zÅÄÖåäö ]+$"))
             {
                 // If the company checkbox is unchecked
                 if (isEmployedCheckbox.IsChecked == false)

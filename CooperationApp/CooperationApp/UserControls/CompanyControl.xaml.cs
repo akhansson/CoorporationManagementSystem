@@ -21,11 +21,18 @@ namespace CooperationApp.UserControls
     /// <summary>
     /// Interaction logic for CompanyControl.xaml
     /// </summary>
-    public partial class CompanyControl : UserControl
+    public partial class CompanyControl : UserControl, ICompanyDatabase
     {
+        // The path of the database
+        static string databaseName = "Companies.db";
+        static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string databasePath = System.IO.Path.Combine(folderPath, databaseName);
+
         public CompanyControl()
         {
             InitializeComponent();
+
+            ReadCompanyDatabase();
         }
 
         private void saveCompanyButton_Click(object sender, RoutedEventArgs e)
@@ -48,22 +55,10 @@ namespace CooperationApp.UserControls
                         CompanyName = companyNameTexbox.Text
                     };
 
-                    // The path of the database
-                    string databaseName = "Companies.db";
-                    string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string databasePath = System.IO.Path.Combine(folderPath, databaseName);
-
-                    // Initialize the SQLite connection
-                    // The "using" statement takes care of closing the connection"
-                    using (SQLiteConnection connection = new SQLiteConnection(databasePath))
-                    {
-                        // Create a table of the type Person
-                        connection.CreateTable<Company>();
-                        // Insert the person object that was created when the save button was clicked into the SQLite table.
-                        connection.Insert(company);
-                    }
+                    WriteCompanyDatabase(company);
 
                     companyNameTexbox.Text = null;
+                    ReadCompanyDatabase();
                 }
                 // Execute if companyNameTextbox.Text is found in the database. Display error message!
                 else
@@ -75,6 +70,41 @@ namespace CooperationApp.UserControls
             {
                 MessageBox.Show("Error: You should only provide letters in the company name. No other characters are supported!", "Non letter characters were provided", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+
+        // Inserts a Company object to the database
+        private void WriteCompanyDatabase(Company company)
+        {
+            // Initialize the SQLite connection
+            // The "using" statement takes care of closing the connection"
+            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            {
+                // Create a table of the type Person
+                connection.CreateTable<Company>();
+                // Insert the person object that was created when the save button was clicked into the SQLite table.
+                connection.Insert(company);
+            }
+        }
+
+        public void ReadCompanyDatabase()
+        {
+            List<Company> companies;
+
+            using (SQLiteConnection companyConnection = new SQLiteConnection(databasePath))
+            {
+                companyConnection.CreateTable<Company>();
+                companies = companyConnection.Table<Company>().ToList();
+            }
+
+            companyAmountLabel.Content = $"{companies.Count} companies in the database";
+        }
+
+        public void showCompaniesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var companiesWindow = new DisplayCompanies();
+            companiesWindow.ShowDialog();
         }
     }
 }
