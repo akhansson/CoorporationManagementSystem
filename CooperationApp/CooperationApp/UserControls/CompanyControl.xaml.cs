@@ -1,4 +1,5 @@
 ﻿using CooperationApp.Coorperation;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,16 +34,42 @@ namespace CooperationApp.UserControls
             if (string.IsNullOrWhiteSpace(companyNameTexbox.Text))
             {
                 MessageBox.Show("You didn't write anything in the field!", "Error: No company name written", MessageBoxButton.OK, MessageBoxImage.Error);
+                companyNameTexbox.Text = null;
             }
             // This code runs if the company name provided is composed of letters. No other characters are accepted.
             else if (Regex.IsMatch(companyNameTexbox.Text, @"^[A-Za-zÅÄÖåäö ]+$"))
             {
-                // Create a Company object
-                Company person = new Company()
+                // Execute if companyNameTextbox.Text isn't found in the database
+                if (true)
                 {
-                    CompanyName = companyNameTexbox.Text
-                };
-                companyNameTexbox.Text = null;
+                    // Create a Company object
+                    Company company = new Company()
+                    {
+                        CompanyName = companyNameTexbox.Text
+                    };
+
+                    // The path of the database
+                    string databaseName = "Companies.db";
+                    string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    string databasePath = System.IO.Path.Combine(folderPath, databaseName);
+
+                    // Initialize the SQLite connection
+                    // The "using" statement takes care of closing the connection"
+                    using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+                    {
+                        // Create a table of the type Person
+                        connection.CreateTable<Company>();
+                        // Insert the person object that was created when the save button was clicked into the SQLite table.
+                        connection.Insert(company);
+                    }
+
+                    companyNameTexbox.Text = null;
+                }
+                // Execute if companyNameTextbox.Text is found in the database. Display error message!
+                else
+                {
+                    MessageBox.Show("The company already exists in the company database.", "Error: Company already exists", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
