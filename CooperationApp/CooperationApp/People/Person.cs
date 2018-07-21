@@ -1,4 +1,5 @@
 ﻿using CooperationApp.Coorperation;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace CooperationApp.People
 {
     public class Person
     {
-        public string FullName { get; private set; }
-
-        public Person(string fullName)
-        {
-            FullName = fullName;
-        }
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+        [MaxLength(50)]
+        public string FullName { get; set; }
+        [MaxLength(50)]
+        public Company Company { get; set; }
     }
 }
