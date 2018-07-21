@@ -1,5 +1,4 @@
-﻿using CooperationApp.Coorperation;
-using CooperationApp.Data;
+﻿using CooperationApp.Data;
 using CooperationApp.Models;
 using CooperationApp.Services;
 using SQLite;

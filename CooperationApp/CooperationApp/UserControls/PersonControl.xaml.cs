@@ -1,5 +1,4 @@
-﻿using CooperationApp.People;
-using CooperationApp.Services;
+﻿using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -57,15 +56,7 @@ namespace CooperationApp.UserControls
                     string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     string databasePath = System.IO.Path.Combine(folderPath, databaseName);
 
-                    // Initialize the SQLite connection
-                    // The "using" statement takes care of closing the connection"
-                    using (SQLiteConnection connection = new SQLiteConnection(databasePath))
-                    {
-                        // Create a table of the type Person
-                        connection.CreateTable<Person>();
-                        // Insert the person object that was created when the save button was clicked into the SQLite table.
-                        connection.Insert(person);
-                    }
+                    
                 }
                 // If the company checkbox is checked
                 else
