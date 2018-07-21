@@ -44,52 +44,18 @@ namespace CooperationApp.UserControls
                     CompanyName = companyNameTexbox.Text
                 });
                 companyNameTexbox.Text = null;
-                DisplayCompanyAmount();
-                
+
+                setCompanyAmountLabel();
             }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-
-            //// Outputs an error if the company name provided is null or an empty string or empty characters
-            //if (string.IsNullOrWhiteSpace(companyNameTexbox.Text))
-            //{
-            //    MessageBox.Show("You didn't write anything in the field!", "Error: No company name written", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    companyNameTexbox.Text = null;
-            //}
-            //// This code runs if the company name provided is composed of letters. No other characters are accepted.
-            //else if (Regex.IsMatch(companyNameTexbox.Text, @"^[A-Za-zÅÄÖåäö ]+$"))
-            //{
-            //    // Execute if companyNameTextbox.Text isn't found in the database
-            //    if (true)
-            //    {
-
-
-            //        companyNameTexbox.Text = null;
-            //        ReadCompanyDatabase();
-            //    }
-            //    // Execute if companyNameTextbox.Text is found in the database. Display error message!
-            //    else
-            //    {
-            //        MessageBox.Show("The company already exists in the company database.", "Error: Company already exists", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Error: You should only provide letters in the company name. No other characters are supported!", "Non letter characters were provided", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
         }
 
 
 
-        public void DisplayCompanyAmount()
-        {
-            var companies = _companyService.GetAllCompanies();
-
-            companyAmountLabel.Content = $"{companies.Count} companies in the database";
-        }
+        
 
         public void showCompaniesButton_Click(object sender, RoutedEventArgs e)
         {
@@ -99,7 +65,12 @@ namespace CooperationApp.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DisplayCompanyAmount();
+            setCompanyAmountLabel();
+        }
+
+        private void setCompanyAmountLabel()
+        {
+            companyAmountLabel.Content = _companyService.CompanyAmount();
         }
     }
 }

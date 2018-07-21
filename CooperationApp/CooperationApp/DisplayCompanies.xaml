@@ -27,7 +27,7 @@
         
         
         <ListView x:Name="companiesListView"
-                  Background="#FFFFE793"
+                  Background="GhostWhite"
                   Grid.Row="1">
             <ListView.View>
                 <GridView>

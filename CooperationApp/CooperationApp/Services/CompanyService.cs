@@ -44,7 +44,7 @@ namespace CooperationApp.Services
                 throw new ArgumentException("You didn't write a company name!", "Error: Whitespace or empty field");
             }
 
-            // This code runs if the company name provided is composed of letters. No other characters are accepted.
+            // Exception thrown if other characters than letters and spaces are provided.
             if (!Regex.IsMatch(company.CompanyName, @"^[A-Za-zÅÄÖåäö ]+$"))
             {
                 throw new ArgumentException("You can only write letters and spaces!");
@@ -64,6 +64,13 @@ namespace CooperationApp.Services
         public List<Person> GetAllPeople()
         {
             return _companyRepository.GetAllPeople();
+        }
+
+        public string CompanyAmount()
+        {
+            var companies = GetAllCompanies();
+
+            return $"{companies.Count} companies in the database";
         }
     }
 }
