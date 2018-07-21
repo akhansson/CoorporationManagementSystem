@@ -34,7 +34,6 @@ namespace CooperationApp.UserControls
 
         private void savePersonButton_Click(object sender, RoutedEventArgs e)
         {
-            ReadCompanyDatabase();
             //// Outputting an error message if no name was provided or white spaces
             //if (string.IsNullOrWhiteSpace(nameTexbox.Text))
             //{
@@ -106,6 +105,11 @@ namespace CooperationApp.UserControls
         private void isEmployedCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             companyCombobox.IsEnabled = false;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ReadCompanyDatabase();
         }
     }
 }
