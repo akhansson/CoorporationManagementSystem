@@ -1,5 +1,4 @@
-﻿using CooperationApp.Coorperation;
-using CooperationApp.Services;
+﻿using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
