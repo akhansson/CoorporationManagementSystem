@@ -35,10 +35,17 @@ namespace CooperationApp.Services
 
         private async Task<int> ValidateCompany(Company company)
         {
+            if (company.CompanyName == string.Empty)
+            {
+                Event.Trigger("error");
+                throw new ArgumentException("You didn't write a  company name!", "Error: Company name dosen't entred");
+            }
+
             var companyHttp = new CooperationApp.Data.CompanyHttp();
             var result = await companyHttp.CheckIfCompanyExist(company.CompanyName);
             
-            if(result == 0)
+            
+            if (result == 0)
             {
                 Event.Trigger("error");
                 throw new ArgumentException("You didn't write a correct company name!", "Error: Company name dosen't exiset");
