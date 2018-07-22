@@ -6,17 +6,18 @@
              xmlns:local="clr-namespace:CooperationApp.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="GhostWhite">
+    <Grid Background="{StaticResource gridColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Label Content="Unemployed People"
+
+        <Label Background="{StaticResource headerBackgroundColor}"
+               Content="Unemployed People"
                HorizontalAlignment="Stretch"
                HorizontalContentAlignment="Center"
-               FontSize="20"
-               Background="#66dddddd"/>
+               FontSize="20"/>
+        
         <ListView Grid.Row="1">
             
         </ListView>

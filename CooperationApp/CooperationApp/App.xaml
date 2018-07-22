@@ -4,6 +4,15 @@
              xmlns:local="clr-namespace:CooperationApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        
+        <SolidColorBrush x:Key="gridColor" Color="#FFF8F8FF"/>
+        <SolidColorBrush x:Key="headerBackgroundColor" Color="#66dddddd"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0 10 0 0"/>
+        </Style>
+
+
+
     </Application.Resources>
 </Application>
