@@ -22,27 +22,35 @@ namespace CooperationApp
     public partial class DisplayCompanies : Window
     {
         private CompanyService _companyService;
-
+        
         public DisplayCompanies()
         {
             _companyService = new CompanyService();
             InitializeComponent();
-            ReadCompanyDatabase();
-
-
+            DisplayCompaniesFromDatabase();
         }
 
-        public void ReadCompanyDatabase()
+        public void DisplayCompaniesFromDatabase()
+        {
+            var companies = _companyService.GetAllCompanies();
+            
+            companiesListView.ItemsSource = companies;
+        }
+        
+
+        private void deleteCompanyButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete is not implemented yet!");
+        }
+
+        private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var companies = _companyService.GetAllCompanies();
 
-            foreach (var company in companies)
-            {
-                companiesListView.Items.Add(new ListViewItem()
-                {
-                    Content = company.CompanyName
-                });
-            }
+            var searchTextBox = sender as TextBox;
+            var filteredList = companies.Where(c => c.CompanyName.ToLower().Contains(searchTextBox.Text.ToLower())).ToList();
+
+            companiesListView.ItemsSource = filteredList;
         }
     }
 }
