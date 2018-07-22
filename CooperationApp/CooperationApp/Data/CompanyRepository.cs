@@ -37,19 +37,6 @@ namespace CooperationApp.Data
             }
         }
 
-        public void AddPerson(Person person)
-        {
-            // Initialize the SQLite connection
-            // The "using" statement takes care of closing the connection"
-            using (var connection = CreateConnection())
-            {
-                // Create a table of the type Person
-                connection.CreateTable<Person>();
-                // Insert the person object that was created when the save button was clicked into the SQLite table.
-                connection.Insert(person);
-            }
-        }
-
         public List<Company> GetAllCompanies()
         {
             using (var companyConnection = CreateConnection())

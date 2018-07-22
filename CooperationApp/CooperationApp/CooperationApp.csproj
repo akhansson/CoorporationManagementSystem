@@ -80,12 +80,15 @@
     </ApplicationDefinition>
     <Compile Include="Data\CompanyHttp.cs" />
     <Compile Include="Data\CompanyRepository.cs" />
+    <Compile Include="Data\PersonRepository.cs" />
+    <Compile Include="Events\Event.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="DisplayCompanies.xaml.cs">
       <DependentUpon>DisplayCompanies.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Person.cs" />
     <Compile Include="Services\CompanyService.cs" />
+    <Compile Include="Services\PersonService.cs" />
     <Compile Include="UserControls\CompanyControl.xaml.cs">
       <DependentUpon>CompanyControl.xaml</DependentUpon>
     </Compile>
