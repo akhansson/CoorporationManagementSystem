@@ -44,6 +44,7 @@ namespace CooperationApp.UserControls
                     FullName = nameTextBox.Text,
                     //Enterprise = (Company)companyCombobox.SelectedItem
                 });
+                nameTextBox.Text = null;
             }
             catch (ArgumentException ex)
             {

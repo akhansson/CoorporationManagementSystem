@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CooperationApp.Services
 {
@@ -23,6 +24,8 @@ namespace CooperationApp.Services
             ValidatePerson(person);
 
             _personRepository.AddPerson(person);
+
+            MessageBox.Show($"\"{person.FullName}\" sucessfully added!", "Person added", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ValidatePerson(Person person)
