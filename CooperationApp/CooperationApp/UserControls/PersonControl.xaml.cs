@@ -42,7 +42,7 @@ namespace CooperationApp.UserControls
                 _personService.AddPerson(new Person
                 {
                     FullName = nameTextBox.Text,
-                    Enterprise = (Company)companyCombobox.SelectedItem
+                    //Enterprise = (Company)companyCombobox.SelectedItem
                 });
             }
             catch (ArgumentException ex)
