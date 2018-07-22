@@ -33,14 +33,6 @@ namespace CooperationApp.Services
             return 1;
         }
 
-        public void AddPerson(Person person)
-        {
-             ValidatePerson(person);
-
-            _companyRepository.AddPerson(person);
-        }
-
-        
         private async Task<int> ValidateCompany(Company company)
         {
             var companyHttp = new CooperationApp.Data.CompanyHttp();
@@ -72,27 +64,17 @@ namespace CooperationApp.Services
 
             return 1;
         }
-
-        private void ValidatePerson(Person person)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public List<Company> GetAllCompanies()
         {
             return _companyRepository.GetAllCompanies().OrderBy(c => c.CompanyName).ToList();
         }
-
-        public List<Person> GetAllPeople()
-        {
-            return _companyRepository.GetAllPeople();
-        }
-
+        
         public string CompanyAmount()
         {
-            var companies = GetAllCompanies();
+            var companyAmount = GetAllCompanies().Count;
 
-            return $"{companies.Count} companies in the database";
+            return $"{companyAmount} companies in the database";
         }
     }
 }

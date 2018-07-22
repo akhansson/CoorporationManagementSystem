@@ -11,7 +11,7 @@ namespace CooperationApp.Data
 
     }
 
-    class PersonRepository : IPersonRepository
+    public class PersonRepository : IPersonRepository
     {
         // The path of the database
         const string DATABASE_NAME = "Coorporation.db";
