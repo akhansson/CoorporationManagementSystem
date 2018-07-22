@@ -82,6 +82,7 @@ namespace CooperationApp.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateCompanyComboBox();
+            //peopleAmountLabel.Content = _personService.PeopleAmount();
         }
     }
 }

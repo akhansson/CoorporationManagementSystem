@@ -75,6 +75,8 @@
                         Width="110"
                         Click="savePersonButton_Click"/>
             </Grid>
+            <Label x:Name="peopleAmountLabel"
+                   FontWeight="Bold"/>
         </StackPanel>
     </Grid>
 </UserControl>
