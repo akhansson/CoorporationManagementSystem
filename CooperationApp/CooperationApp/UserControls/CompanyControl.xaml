@@ -25,7 +25,7 @@
                HorizontalContentAlignment="Center"
                FontSize="20"/>
         <Label Background="{StaticResource headerBackgroundColor}"
-               Content="Choose a company to see the employees"
+               Content="Display Employees"
                HorizontalAlignment="Stretch"
                HorizontalContentAlignment="Center"
                FontSize="20"
@@ -38,9 +38,9 @@
         <StackPanel Background="Transparent"
                     Orientation="Horizontal"
                     Grid.Row="1"
-                    Grid.Column="1">
-            <Label Content="Company: "
-                   Margin="10 0 0 0"/>
+                    Grid.Column="1"
+                    HorizontalAlignment="Center">
+            <Label Content="Company: "/>
             <ComboBox x:Name="companyPickerComboBox"
                       VerticalAlignment="Center"
                       Width="200"/>
