@@ -16,24 +16,23 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="Search: "/>
-            <TextBox VerticalAlignment="Center"
-                     Width="150"/>
+            <TextBox x:Name="searchTextBox"
+                     VerticalAlignment="Center"
+                     Width="150"
+                     TextChanged="searchTextBox_TextChanged"/>
             <Button x:Name="deleteCompanyButton"
                     VerticalAlignment="Center"
                     Content="Delete company"
-                    Margin="10 0 0 0"/>
+                    Margin="10 0 0 0"
+                    Click="deleteCompanyButton_Click"/>
         </StackPanel>
-        
-        
-        
+
+
         <ListView x:Name="companiesListView"
                   Background="GhostWhite"
                   Grid.Row="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Company name"/>
-                </GridView>
-            </ListView.View>
+            
         </ListView>
+        
     </Grid>
 </Window>
