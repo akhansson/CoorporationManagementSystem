@@ -36,26 +36,11 @@ namespace CooperationApp.Services
             {
                 throw new ArgumentException("You can only write letters and spaces!", "Error: Unsupported characters provided");
             }
-                // If the company checkbox is unchecked
-                if (isEmployedCheckbox.IsChecked == false)
-                {
-                    
-                }
-                // If the company checkbox is checked
-                else
-                {
-                    // Outputting an error message if no name was provided or white spaces and if the company wasn't selected
-                    if (string.IsNullOrWhiteSpace(nameTexbox.Text) && !companyCombobox.HasItems)
-                    {
-                        MessageBox.Show("Error: Person not added to the database! You have to provide both a name and a company.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            }
         }
 
         public List<Person> GetAllPeople()
         {
-            return _personRepository.GetAllPeople();
+            return _personRepository.GetAllPeople().OrderBy(c => c.FullName).ToList();
         }
 
         public string PeopleAmount()
