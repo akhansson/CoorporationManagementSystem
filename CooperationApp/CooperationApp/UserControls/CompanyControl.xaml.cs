@@ -34,15 +34,19 @@ namespace CooperationApp.UserControls
             InitializeComponent();
         }
 
-        private void saveCompanyButton_Click(object sender, RoutedEventArgs e)
+        private async void saveCompanyButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                saveCompanyButton.IsEnabled = false;
                 // Create a Company object
-                _companyService.AddCompany(new Company()
+                await _companyService.AddCompany(new Company()
                 {
                     CompanyName = companyNameTexbox.Text
                 });
+
+                saveCompanyButton.IsEnabled = true;
+
                 companyNameTexbox.Text = null;
 
                 setCompanyAmountLabel();

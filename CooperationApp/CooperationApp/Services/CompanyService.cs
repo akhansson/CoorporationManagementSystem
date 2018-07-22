@@ -19,24 +19,26 @@ namespace CooperationApp.Services
             _companyRepository = new CompanyRepository();
         }
 
-        public void AddCompany(Company company)
+        public async Task<int> AddCompany(Company company)
         {
-            ValidateCompany(company);
+            await ValidateCompany(company);
 
             _companyRepository.AddCompany(company);
 
             MessageBox.Show("Company sucessfully added!", "Company added", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            return 1;
         }
 
         public void AddPerson(Person person)
         {
-            ValidatePerson(person);
+             ValidatePerson(person);
 
             _companyRepository.AddPerson(person);
         }
 
         
-        private static async void ValidateCompany(Company company)
+        private static async Task<int> ValidateCompany(Company company)
         {
             var companyHttp = new CooperationApp.Data.CompanyHttp();
             var result = await companyHttp.CheckIfCompanyExist(company.CompanyName);
@@ -60,6 +62,8 @@ namespace CooperationApp.Services
             {
                 throw new ArgumentException("You can only write letters and spaces!");
             }
+
+            return 1;
         }
 
         private void ValidatePerson(Person person)
