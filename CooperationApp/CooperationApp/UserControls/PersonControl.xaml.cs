@@ -59,20 +59,15 @@ namespace CooperationApp.UserControls
         {
             var companies = _companyService.GetAllCompanies();
 
-            foreach (var company in companies)
-            {
-                companyCombobox.Items.Add(new ComboBoxItem()
-                {
-                    Content = company.CompanyName
-                });
-            }
+            companyCombobox.ItemsSource = companies;
+            
         }
 
         private void isEmployedCheckbox_Checked(object sender, RoutedEventArgs e)
         {
             if (!companyCombobox.HasItems)
             {
-                MessageBox.Show("There are no companies registered. Register a company in the company tab first if you plan to add the person to a company.", "No companies in the database", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("There are no companies registered yet!", "No companies in the database", MessageBoxButton.OK, MessageBoxImage.Error);
                 isEmployedCheckbox.IsChecked = false;
                 companyCombobox.SelectedItem = null;
             }

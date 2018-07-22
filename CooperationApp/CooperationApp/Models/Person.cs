@@ -9,6 +9,6 @@ namespace CooperationApp.Models
         [MaxLength(50)]
         public string FullName { get; set; }
         [MaxLength(50)]
-        public Company CompanyName { get; set; }
+        public Company Enterprise { get; set; }
     }
 }
