@@ -45,7 +45,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Name: "/>
-                <TextBox x:Name="nameTexbox"
+                <TextBox x:Name="nameTextBox"
                          Grid.Column="1"/>
 
                 <CheckBox x:Name="isEmployedCheckbox"

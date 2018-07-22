@@ -1,4 +1,5 @@
-﻿using CooperationApp.Services;
+﻿using CooperationApp.Models;
+using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -23,32 +24,38 @@ namespace CooperationApp.UserControls
     /// </summary>
     public partial class PersonControl : UserControl
     {
-        private CompanyService _companyService;
+        private PersonService _personService;
 
         public PersonControl()
         {
-            _companyService = new CompanyService();
+            _personService = new PersonService();
 
             InitializeComponent();
         }
 
         private void savePersonButton_Click(object sender, RoutedEventArgs e)
         {
-            // If the company checkbox is unchecked
-            if (isEmployedCheckbox.IsChecked == false)
+            try
             {
-
+                _personService.AddPerson(new Person
+                {
+                    FullName = nameTextBox.Text
+                    // Associera företaget här...
+                    //
+                    // Jag kommer att fortsätta att koda här
+                });
             }
-            // If the company checkbox is checked
-            else
+            catch (ArgumentException ex)
             {
-                
+                nameTextBox.Focus();
+                nameTextBox.SelectAll();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         public void ReadCompanyDatabase()
         {
-            var companies = _companyService.GetAllCompanies();
+            var companies = _personService.GetAllCompanies();
 
             foreach (var company in companies)
             {
@@ -65,10 +72,12 @@ namespace CooperationApp.UserControls
             {
                 MessageBox.Show("There are no companies registered. Register a company in the company tab first if you plan to add the person to a company.", "No companies in the database", MessageBoxButton.OK, MessageBoxImage.Error);
                 isEmployedCheckbox.IsChecked = false;
+                companyCombobox.SelectedItem = null;
             }
             else
             {
                 companyCombobox.IsEnabled = true;
+                companyCombobox.SelectedItem = 0;
             }
         }
 
