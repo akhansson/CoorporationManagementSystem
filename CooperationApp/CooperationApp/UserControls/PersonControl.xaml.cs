@@ -60,7 +60,6 @@ namespace CooperationApp.UserControls
             var companies = _companyService.GetAllCompanies();
 
             companyCombobox.ItemsSource = companies;
-            
         }
 
         private void isEmployedCheckbox_Checked(object sender, RoutedEventArgs e)
@@ -69,17 +68,17 @@ namespace CooperationApp.UserControls
             {
                 MessageBox.Show("There are no companies registered yet!", "No companies in the database", MessageBoxButton.OK, MessageBoxImage.Error);
                 isEmployedCheckbox.IsChecked = false;
-                companyCombobox.SelectedItem = null;
             }
             else
             {
                 companyCombobox.IsEnabled = true;
-                companyCombobox.SelectedItem = 0;
+                companyCombobox.SelectedIndex = 0;
             }
         }
 
         private void isEmployedCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
+            companyCombobox.SelectedIndex = -1;
             companyCombobox.IsEnabled = false;
         }
 
