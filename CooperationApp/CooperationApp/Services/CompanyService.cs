@@ -73,7 +73,7 @@ namespace CooperationApp.Services
 
         public List<Company> GetAllCompanies()
         {
-            return _companyRepository.GetAllCompanies();
+            return _companyRepository.GetAllCompanies().OrderBy(c => c.CompanyName).ToList();
         }
 
         public List<Person> GetAllPeople()
