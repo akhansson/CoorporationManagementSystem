@@ -1,6 +1,7 @@
 ﻿using CooperationApp.Data;
 using CooperationApp.Models;
 using CooperationApp.Services;
+using Core.Util;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,14 @@ namespace CooperationApp.UserControls
         public CompanyControl()
         {
             _companyService = new CompanyService();
+            _companyService.Event.OnEvent += (object source, EventArgs e) => {
 
+                var evt = (EventClassArgs)e;
+                if (evt.Name == "error")
+                {
+                    saveCompanyButton.IsEnabled = true;
+                }
+            };
             InitializeComponent();
         }
 
@@ -53,6 +61,8 @@ namespace CooperationApp.UserControls
             }
             catch (ArgumentException ex)
             {
+                companyNameTexbox.Focus();
+                companyNameTexbox.SelectAll();
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
