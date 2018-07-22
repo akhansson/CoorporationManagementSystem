@@ -36,8 +36,10 @@ namespace CooperationApp.Services
         }
 
         
-        private static void ValidateCompany(Company company)
+        private static async void ValidateCompany(Company company)
         {
+            var companyHttp = new CooperationApp.Data.CompanyHttp();
+            var result = await companyHttp.CheckIfCompanyExist(company.CompanyName);
             // Outputs an error if the company name provided is null or an empty string or empty characters
             if (string.IsNullOrWhiteSpace(company.CompanyName))
             {
