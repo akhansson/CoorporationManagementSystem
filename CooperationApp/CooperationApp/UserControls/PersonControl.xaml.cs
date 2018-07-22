@@ -24,10 +24,12 @@ namespace CooperationApp.UserControls
     /// </summary>
     public partial class PersonControl : UserControl
     {
+        private CompanyService _companyService;
         private PersonService _personService;
 
         public PersonControl()
         {
+            _companyService = new CompanyService();
             _personService = new PersonService();
 
             InitializeComponent();
@@ -53,9 +55,9 @@ namespace CooperationApp.UserControls
             }
         }
 
-        public void ReadCompanyDatabase()
+        public void PopulateCompanyComboBox()
         {
-            var companies = _personService.GetAllCompanies();
+            var companies = _companyService.GetAllCompanies();
 
             foreach (var company in companies)
             {
@@ -88,7 +90,7 @@ namespace CooperationApp.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ReadCompanyDatabase();
+            PopulateCompanyComboBox();
         }
     }
 }
