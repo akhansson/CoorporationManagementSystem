@@ -40,14 +40,23 @@ namespace CooperationApp.Services
         {
             var companyHttp = new CooperationApp.Data.CompanyHttp();
             var result = await companyHttp.CheckIfCompanyExist(company.CompanyName);
+            
+            if(result == 0)
+            {
+                throw new ArgumentException("You didn't write a correct company name!", "Error: Company name dosen't exiset");
+            }
+            else if (result == -1)
+            {
+                throw new ArgumentException("We could't check if the company exist!", "Error: Server dosen't respond");
+            }
             // Outputs an error if the company name provided is null or an empty string or empty characters
-            if (string.IsNullOrWhiteSpace(company.CompanyName))
+            else if (string.IsNullOrWhiteSpace(company.CompanyName))
             {
                 throw new ArgumentException("You didn't write a company name!", "Error: Whitespace or empty field");
             }
 
             // Exception thrown if other characters than letters and spaces are provided.
-            if (!Regex.IsMatch(company.CompanyName, @"^[A-Za-zÅÄÖåäö ]+$"))
+            else if (!Regex.IsMatch(company.CompanyName, @"^[A-Za-zÅÄÖåäö ]+$"))
             {
                 throw new ArgumentException("You can only write letters and spaces!");
             }

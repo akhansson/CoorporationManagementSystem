@@ -39,9 +39,9 @@ namespace CooperationApp.Data
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
             request.AddHeader("authorization", "Bearer " + _accessToken);
+            request.AddHeader("Accept", "application/json");
             request.AddParameter("application/x-www-form-urlencoded", "grant_type=client_credentials", ParameterType.RequestBody);
-
- 
+            
 
             var cancellationTokenSource = new CancellationTokenSource();
             var restResponse = await client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
@@ -51,9 +51,10 @@ namespace CooperationApp.Data
                 try
                 {
                     var hitcount = (int)JObject.Parse(restResponse.Content)["hitCount"];
-
                     if (hitcount > 0)
                         return 1;
+                    else
+                        return 0;
                 }
                 catch
                 {
@@ -88,8 +89,6 @@ namespace CooperationApp.Data
 
                     this._expiresIn = (int)content["expires_in"];
                     this._accessToken = (string)content["access_token"];
-
-         
                     this._expiresInDate = DateTime.Now.AddSeconds(_expiresIn);
 
                     return content;
