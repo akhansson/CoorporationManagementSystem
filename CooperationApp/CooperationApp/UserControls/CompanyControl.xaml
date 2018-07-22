@@ -32,9 +32,10 @@
                Grid.Column="1"/>
 
         <Grid Background="#FFFFE27F"
-              Grid.Row="1"/>
+              Grid.Row="1"
+              Grid.ColumnSpan="2"/>
 
-        <StackPanel Background="#FFFFE27F"
+        <StackPanel Background="Transparent"
                     Orientation="Horizontal"
                     Grid.Row="1"
                     Grid.Column="1">

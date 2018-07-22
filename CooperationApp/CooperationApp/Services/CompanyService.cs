@@ -35,40 +35,34 @@ namespace CooperationApp.Services
 
         private async Task<int> ValidateCompany(Company company)
         {
-            if (company.CompanyName == string.Empty)
-            {
-                Event.Trigger("error");
-                throw new ArgumentException("You didn't write a  company name!", "Error: Company name dosen't entred");
-            }
-
-            var companyHttp = new CooperationApp.Data.CompanyHttp();
-            var result = await companyHttp.CheckIfCompanyExist(company.CompanyName);
-            
-            
-            if (result == 0)
-            {
-                Event.Trigger("error");
-                throw new ArgumentException("You didn't write a correct company name!", "Error: Company name dosen't exiset");
-            }
-            else if (result == -1)
-            {
-                Event.Trigger("error");
-                throw new ArgumentException("We could't check if the company exist!", "Error: Server dosen't respond");
-            }
             // Outputs an error if the company name provided is null or an empty string or empty characters
-            else if (string.IsNullOrWhiteSpace(company.CompanyName))
+            if (string.IsNullOrWhiteSpace(company.CompanyName))
             {
                 Event.Trigger("error");
                 throw new ArgumentException("You didn't write a company name!", "Error: Whitespace or empty field");
             }
-
             // Exception thrown if other characters than letters and spaces are provided.
-            else if (!Regex.IsMatch(company.CompanyName, @"^[A-Za-zÅÄÖåäö ]+$"))
+            if (!Regex.IsMatch(company.CompanyName, @"^[A-Za-zÅÄÖåäö ]+$"))
             {
                 Event.Trigger("error");
-                throw new ArgumentException("You can only write letters and spaces!");
+                throw new ArgumentException("You can only write letters and spaces!", "Error: Unsupported characters provided");
             }
 
+            // Check the API answer and return the corresponding exception or 1 when succeeded
+            var companyHttp = new CooperationApp.Data.CompanyHttp();
+            var result = await companyHttp.CheckIfCompanyExist(company.CompanyName);
+            
+            if (result == 0)
+            {
+                Event.Trigger("error");
+                throw new ArgumentException("You didn't write a correct company name!", "Error: Company name doesn't exist");
+            }
+            else if (result == -1)
+            {
+                Event.Trigger("error");
+                throw new ArgumentException("We could't check if the company exist!", "Error: Server doesn't respond");
+            }
+            
             return 1;
         }
         

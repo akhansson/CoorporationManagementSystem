@@ -31,6 +31,7 @@ namespace CooperationApp.UserControls
         public CompanyControl()
         {
             _companyService = new CompanyService();
+
             _companyService.Event.OnEvent += (object source, EventArgs e) => {
 
                 var evt = (EventClassArgs)e;
@@ -53,10 +54,10 @@ namespace CooperationApp.UserControls
                     CompanyName = companyNameTexbox.Text
                 });
 
-                saveCompanyButton.IsEnabled = true;
-
                 companyNameTexbox.Text = null;
 
+                saveCompanyButton.IsEnabled = true;
+                
                 setCompanyAmountLabel();
             }
             catch (ArgumentException ex)
