@@ -80,9 +80,8 @@
     </ApplicationDefinition>
     <Compile Include="Data\CompanyHttp.cs" />
     <Compile Include="Data\CompanyRepository.cs" />
-
+    <Compile Include="Data\IDbConnection.cs" />
     <Compile Include="Data\PersonRepository.cs" />
-
     <Compile Include="Events\Event.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="DisplayCompanies.xaml.cs">

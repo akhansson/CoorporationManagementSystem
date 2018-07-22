@@ -33,6 +33,11 @@ namespace CooperationApp.Services
             return 1;
         }
 
+        public void RemoveCompany(Company company)
+        {
+            _companyRepository.RemoveCompany(company);
+        }
+
         private async Task<int> ValidateCompany(Company company)
         {
             // Outputs an error if the company name provided is null or an empty string or empty characters

@@ -37,6 +37,15 @@ namespace CooperationApp.Data
             }
         }
 
+        public void RemoveCompany(Company company)
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.CreateTable<Company>();
+                connection.Delete(company);
+            }
+        }
+
         public List<Company> GetAllCompanies()
         {
             using (var companyConnection = CreateConnection())

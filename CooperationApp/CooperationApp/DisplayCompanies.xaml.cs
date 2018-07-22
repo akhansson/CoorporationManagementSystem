@@ -1,4 +1,5 @@
-﻿using CooperationApp.Services;
+﻿using CooperationApp.Models;
+using CooperationApp.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -33,14 +34,16 @@ namespace CooperationApp
         public void DisplayCompaniesFromDatabase()
         {
             var companies = _companyService.GetAllCompanies();
-            
             companiesListView.ItemsSource = companies;
         }
         
 
         private void deleteCompanyButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Delete is not implemented yet!");
+            var selectedCompany = companiesListView.SelectedItem as Company;
+
+            _companyService.RemoveCompany(selectedCompany);
+            DisplayCompaniesFromDatabase();
         }
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)

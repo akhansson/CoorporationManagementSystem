@@ -41,10 +41,8 @@ namespace CooperationApp.UserControls
             {
                 _personService.AddPerson(new Person
                 {
-                    FullName = nameTextBox.Text
-                    // Associera företaget här...
-                    //
-                    // Jag kommer att fortsätta att koda här
+                    FullName = nameTextBox.Text,
+                    Enterprise = (Company)companyCombobox.SelectedItem
                 });
             }
             catch (ArgumentException ex)
@@ -58,7 +56,6 @@ namespace CooperationApp.UserControls
         public void PopulateCompanyComboBox()
         {
             var companies = _companyService.GetAllCompanies();
-
             companyCombobox.ItemsSource = companies;
         }
 
