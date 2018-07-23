@@ -46,6 +46,11 @@ namespace CooperationApp
             DisplayCompaniesFromDatabase();
         }
 
+        private void editCompanyNameButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var companies = _companyService.GetAllCompanies();

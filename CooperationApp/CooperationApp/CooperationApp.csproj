@@ -84,6 +84,9 @@
     <Compile Include="Data\IDbCommand.cs" />
     <Compile Include="Data\IDbConnection.cs" />
     <Compile Include="Data\PersonRepository.cs" />
+    <Compile Include="EditCompany.xaml.cs">
+      <DependentUpon>EditCompany.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Events\Event.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="DisplayCompanies.xaml.cs">
@@ -102,6 +105,10 @@
       <DependentUpon>UnemployedControl.xaml</DependentUpon>
     </Compile>
     <Page Include="DisplayCompanies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditCompany.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
