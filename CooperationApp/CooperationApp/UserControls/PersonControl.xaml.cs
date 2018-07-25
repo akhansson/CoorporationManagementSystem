@@ -46,7 +46,7 @@ namespace CooperationApp.UserControls
                     CompanyId = selectedCompany?.Id
                 });
                 nameTextBox.Text = null;
-
+                peopleAmountLabel.Content = _personService.PeopleAmount();
             }
             catch (ArgumentException ex)
             {
