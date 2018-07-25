@@ -59,5 +59,16 @@ namespace CooperationApp.Data
         {
             return new SQLiteConnection(_databasePath);
         }
+
+        public List<Company> SearchCompany(string searchString)
+        {
+            using (var companyConnection = CreateConnection())
+            {
+                companyConnection.CreateTable<Company>();
+                return companyConnection.Table<Company>()
+                    .Where(c => c.CompanyName.Contains(searchString))
+                    .ToList();
+            }
+        }
     }
 }

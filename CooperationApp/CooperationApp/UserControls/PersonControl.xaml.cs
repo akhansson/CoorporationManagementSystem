@@ -39,10 +39,11 @@ namespace CooperationApp.UserControls
         {
             try
             {
+                var selectedCompany = companyCombobox.SelectedItem as Company;
                 _personService.AddPerson(new Person
                 {
                     FullName = nameTextBox.Text,
-                    //Enterprise = (Company)companyCombobox.SelectedItem
+                    CompanyId = selectedCompany?.Id
                 });
                 nameTextBox.Text = null;
             }
