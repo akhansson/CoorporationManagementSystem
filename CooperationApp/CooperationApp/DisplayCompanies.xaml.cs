@@ -33,7 +33,7 @@ namespace CooperationApp
             DisplayCompaniesFromDatabase();
         }
 
-        public void DisplayCompaniesFromDatabase()
+        private void DisplayCompaniesFromDatabase()
         {
             var companies = _companyService.GetAllCompanies();
             companiesListView.ItemsSource = companies;
