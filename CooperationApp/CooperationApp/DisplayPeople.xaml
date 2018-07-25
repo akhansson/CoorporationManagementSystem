@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="DisplayPeople" Height="450" Width="400"
         MinWidth="400" MaxWidth="600"
-        WindowStartupLocation="CenterScreen"
-        Unloaded="Window_Unloaded">
+        WindowStartupLocation="CenterScreen">
     
     <Grid>
         <Grid.RowDefinitions>

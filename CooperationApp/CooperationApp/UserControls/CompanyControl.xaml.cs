@@ -71,8 +71,17 @@ namespace CooperationApp.UserControls
         
         public void showCompaniesButton_Click(object sender, RoutedEventArgs e)
         {
-            var companiesWindow = new DisplayCompanies();
-            companiesWindow.ShowDialog();
+            var displayCompanies = new DisplayCompanies();
+            displayCompanies.Event.OnEvent += (object source, EventArgs e2) => {
+
+                var evt = (EventClassArgs)e2;
+                if (evt.Name == "deletedCompany")
+                {
+                    setCompanyAmountLabel();
+                }
+            };
+
+            displayCompanies.ShowDialog();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

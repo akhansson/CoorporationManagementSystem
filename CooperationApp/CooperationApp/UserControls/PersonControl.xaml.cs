@@ -1,5 +1,6 @@
 ﻿using CooperationApp.Models;
 using CooperationApp.Services;
+using Core.Util;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace CooperationApp.UserControls
             }
         }
 
-        public void setPeopleAmountLabel()
+        private void setPeopleAmountLabel()
         {
             peopleAmountLabel.Content = _personService.PeopleAmount();
         }
@@ -96,6 +97,15 @@ namespace CooperationApp.UserControls
         private void viewPeopleButton_Click(object sender, RoutedEventArgs e)
         {
             var displayPeople = new DisplayPeople();
+            displayPeople.Event.OnEvent += (object source, EventArgs e2) => {
+
+                var evt = (EventClassArgs)e2;
+                if (evt.Name == "deletedPeople")
+                {
+                    setPeopleAmountLabel();
+                }
+            };
+
             displayPeople.ShowDialog();
         }
     }

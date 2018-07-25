@@ -1,5 +1,6 @@
 ﻿using CooperationApp.Models;
 using CooperationApp.Services;
+using Core.Util;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,8 @@ namespace CooperationApp
     public partial class DisplayCompanies : Window
     {
         private CompanyService _companyService;
-        
+        public Event Event = new Event();
+
         public DisplayCompanies()
         {
             _companyService = new CompanyService();
@@ -41,9 +43,12 @@ namespace CooperationApp
         private void deleteCompanyButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedCompany = companiesListView.SelectedItem as Company;
-
+            
             _companyService.RemoveCompany(selectedCompany);
+
             DisplayCompaniesFromDatabase();
+
+            Event.Trigger("deletedCompany");
         }
 
         private void editCompanyNameButton_Click(object sender, RoutedEventArgs e)

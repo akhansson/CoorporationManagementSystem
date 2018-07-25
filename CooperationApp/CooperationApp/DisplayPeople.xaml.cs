@@ -49,12 +49,10 @@ namespace CooperationApp
             _personService.RemovePerson(selectedPerson);
 
             DisplayPeopleFromDatabase();
-            Event.Trigger("deletedPepole");
+
+            Event.Trigger("deletedPeople");
         }
 
-        private void Window_Unloaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        
     }
 }
