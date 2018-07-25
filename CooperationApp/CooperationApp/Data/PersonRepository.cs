@@ -37,6 +37,15 @@ namespace CooperationApp.Data
             }
         }
 
+        public void RemovePerson(Person person)
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.CreateTable<Person>();
+                connection.Delete(person);
+            }
+        }
+
         public List<Person> GetAllPeople()
         {
             using (var personConnection = CreateConnection())

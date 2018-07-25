@@ -84,6 +84,9 @@
     <Compile Include="Data\CompanyHttp.cs" />
     <Compile Include="Data\CompanyRepository.cs" />
     <Compile Include="Data\PersonRepository.cs" />
+    <Compile Include="DisplayPeople.xaml.cs">
+      <DependentUpon>DisplayPeople.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditCompany.xaml.cs">
       <DependentUpon>EditCompany.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
       <DependentUpon>UnemployedControl.xaml</DependentUpon>
     </Compile>
     <Page Include="DisplayCompanies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DisplayPeople.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

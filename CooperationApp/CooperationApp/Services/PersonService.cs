@@ -28,6 +28,11 @@ namespace CooperationApp.Services
             MessageBox.Show($"\"{person.FullName}\" sucessfully added!", "Person added", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        public void RemovePerson(Person person)
+        {
+            _personRepository.RemovePerson(person);
+        }
+
         private void ValidatePerson(Person person)
         {
             // Outputting an error message if no name was provided or white spaces

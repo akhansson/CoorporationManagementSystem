@@ -46,7 +46,7 @@ namespace CooperationApp.UserControls
                     CompanyId = selectedCompany?.Id
                 });
                 nameTextBox.Text = null;
-                peopleAmountLabel.Content = _personService.PeopleAmount();
+                setPeopleAmountLabel();
             }
             catch (ArgumentException ex)
             {
@@ -54,6 +54,11 @@ namespace CooperationApp.UserControls
                 nameTextBox.SelectAll();
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public void setPeopleAmountLabel()
+        {
+            peopleAmountLabel.Content = _personService.PeopleAmount();
         }
 
         public void PopulateCompanyComboBox()
@@ -86,6 +91,12 @@ namespace CooperationApp.UserControls
         {
             PopulateCompanyComboBox();
             peopleAmountLabel.Content = _personService.PeopleAmount();
+        }
+
+        private void viewPeopleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var displayPeople = new DisplayPeople();
+            displayPeople.ShowDialog();
         }
     }
 }
