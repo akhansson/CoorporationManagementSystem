@@ -33,7 +33,13 @@
         <ListView x:Name="companiesListView"
                   Background="GhostWhite"
                   Grid.Row="1">
-            
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Company">
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
         
     </Grid>

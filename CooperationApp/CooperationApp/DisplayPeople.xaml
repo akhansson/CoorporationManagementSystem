@@ -31,7 +31,19 @@
         <ListView x:Name="personListView"
                   Background="GhostWhite"
                   Grid.Row="1">
-            
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name"
+                                    DisplayMemberBinding="{Binding FullName}">
+                        
+                    </GridViewColumn>
+                    <GridViewColumn Header="Company"
+                                    DisplayMemberBinding="{Binding CompanyName}">
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
         </ListView>
     </Grid>
 </Window>
