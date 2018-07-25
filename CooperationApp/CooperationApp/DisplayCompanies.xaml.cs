@@ -50,11 +50,7 @@ namespace CooperationApp
 
             Event.Trigger("deletedCompany");
         }
-
-        private void editCompanyNameButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
