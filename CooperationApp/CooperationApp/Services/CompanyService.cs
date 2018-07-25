@@ -85,7 +85,10 @@ namespace CooperationApp.Services
         {
             var companyAmount = GetAllCompanies().Count;
 
-            return $"{companyAmount} companies in the database";
+            if (companyAmount == 1)
+                return $"{companyAmount} company in the database";
+            else
+                return $"{companyAmount} companies in the database";
         }
 
         
