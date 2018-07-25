@@ -25,10 +25,7 @@
                     Content="Delete"
                     Margin="10 0 0 0"
                     Click="deletePersonButton_Click"/>
-            <Button x:Name="editPersonButton"
-                    VerticalAlignment="Center"
-                    Content="Edit"
-                    Margin="10 0 0 0"/>
+            
         </StackPanel>
 
         <ListView x:Name="personListView"
