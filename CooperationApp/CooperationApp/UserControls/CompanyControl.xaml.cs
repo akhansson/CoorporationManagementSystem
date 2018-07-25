@@ -44,6 +44,12 @@ namespace CooperationApp.UserControls
             InitializeComponent();
         }
 
+        public void PopulateCompaniesComboBox()
+        {
+            var companies = _companyService.GetAllCompanies();
+            companyPickerComboBox.ItemsSource = companies;
+        }
+
         private async void saveCompanyButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -60,6 +66,8 @@ namespace CooperationApp.UserControls
                 saveCompanyButton.IsEnabled = true;
                 
                 setCompanyAmountLabel();
+
+                PopulateCompaniesComboBox();
             }
             catch (ArgumentException ex)
             {
@@ -86,6 +94,7 @@ namespace CooperationApp.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            PopulateCompaniesComboBox();
             setCompanyAmountLabel();
         }
 
