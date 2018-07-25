@@ -49,7 +49,7 @@ namespace CooperationApp.Services
         public string PeopleAmount()
         {
             var peopleAmount = _personRepository.GetAllPeople().Count;
-            return $"{peopleAmount}";
+            return $"{peopleAmount} people in the database";
         }
     }
 }

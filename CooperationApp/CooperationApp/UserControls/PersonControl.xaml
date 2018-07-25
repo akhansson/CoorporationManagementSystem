@@ -42,6 +42,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <Label Content="Name: "/>
@@ -74,6 +75,11 @@
                         HorizontalAlignment="Right"
                         Width="110"
                         Click="savePersonButton_Click"/>
+                <Label x:Name="personAmountLabel"
+                       HorizontalAlignment="Right"
+                       Grid.Column="1"
+                       Grid.Row="4"
+                       FontWeight="Bold"/>
             </Grid>
             <Label x:Name="peopleAmountLabel"
                    FontWeight="Bold"/>
