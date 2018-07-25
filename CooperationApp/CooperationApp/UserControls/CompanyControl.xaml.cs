@@ -52,11 +52,10 @@ namespace CooperationApp.UserControls
             companyPickerComboBox.ItemsSource = companies;
         }
 
-        public void DisplayEmployeesFromDatabase()
+        public void DisplayEmployeesFromDatabase(Company company)
         {
-            var employedPeople = _personService.GetAllUnemployed();
+            var employedPeople = _personService.GetEmployees(company);
             employeeListView.ItemsSource = employedPeople.Select(c => c.FullName);
-            //unemployedListView.ItemsSource = unemployed.Select(c => c.FullName);
         }
 
         private async void saveCompanyButton_Click(object sender, RoutedEventArgs e)
@@ -114,7 +113,15 @@ namespace CooperationApp.UserControls
 
         private void companyPickerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayEmployeesFromDatabase();
+            try
+            {
+                var selectedCompany = companyPickerComboBox.SelectedItem as Company;
+                DisplayEmployeesFromDatabase(selectedCompany);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException();
+            }
         }
     }
 }
