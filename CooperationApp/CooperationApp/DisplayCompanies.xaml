@@ -35,7 +35,8 @@
                   Grid.Row="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Company">
+                    <GridViewColumn Header="Company"
+                                    DisplayMemberBinding="{Binding CompanyName}">
 
                     </GridViewColumn>
                 </GridView>
