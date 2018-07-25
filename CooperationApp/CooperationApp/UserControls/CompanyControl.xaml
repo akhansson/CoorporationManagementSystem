@@ -18,7 +18,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Label Background="{StaticResource headerBackgroundColor}"
                Content="Create Company"
                HorizontalAlignment="Stretch"
@@ -31,24 +31,31 @@
                FontSize="20"
                Grid.Column="1"/>
 
-        <Grid Background="#FFFFE27F"
+        <Grid Background="{StaticResource headerBackgroundColor}"
               Grid.Row="1"
-              Grid.ColumnSpan="2"/>
+              Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="257*"/>
+                <ColumnDefinition Width="85*"/>
+                <ColumnDefinition Width="387*"/>
+                <ColumnDefinition Width="71*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
         <StackPanel Background="Transparent"
                     Orientation="Horizontal"
                     Grid.Row="1"
                     Grid.Column="1"
                     HorizontalAlignment="Center">
-            <Label Content="Company: "/>
+
             <ComboBox x:Name="companyPickerComboBox"
                       VerticalAlignment="Center"
                       Width="200"/>
         </StackPanel>
-        
-        
-            
-        
+
+
+
+
         <StackPanel Orientation="Vertical"
                     Grid.Row="2"
                     Margin="5">
@@ -93,7 +100,7 @@
                        FontWeight="Bold"/>
             </Grid>
         </StackPanel>
-        
+
         <ListView x:Name="employeeListView"
                   VerticalAlignment="Stretch"
                   HorizontalAlignment="Stretch"
