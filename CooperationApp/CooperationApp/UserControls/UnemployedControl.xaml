@@ -17,8 +17,9 @@
                HorizontalAlignment="Stretch"
                HorizontalContentAlignment="Center"
                FontSize="20"/>
-        
-        <ListView Grid.Row="1">
+
+        <ListView x:Name="unemployedListView"
+                  Grid.Row="1">
             
         </ListView>
     </Grid>

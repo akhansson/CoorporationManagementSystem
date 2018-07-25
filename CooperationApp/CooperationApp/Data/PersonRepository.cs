@@ -46,6 +46,15 @@ namespace CooperationApp.Data
             }
         }
 
+        public List<Person> GetAllUnemployed()
+        {
+            using (var personConnection = CreateConnection())
+            {
+                personConnection.CreateTable<Person>();
+                return personConnection.Table<Person>().Where(c => c.CompanyId == null).ToList();
+            }
+        }
+
         private SQLiteConnection CreateConnection()
         {
             return new SQLiteConnection(_databasePath);

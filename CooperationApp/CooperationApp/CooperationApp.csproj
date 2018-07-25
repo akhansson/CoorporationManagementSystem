@@ -83,9 +83,6 @@
     </ApplicationDefinition>
     <Compile Include="Data\CompanyHttp.cs" />
     <Compile Include="Data\CompanyRepository.cs" />
-    <Compile Include="Data\IDataReader.cs" />
-    <Compile Include="Data\IDbCommand.cs" />
-    <Compile Include="Data\IDbConnection.cs" />
     <Compile Include="Data\PersonRepository.cs" />
     <Compile Include="EditCompany.xaml.cs">
       <DependentUpon>EditCompany.xaml</DependentUpon>

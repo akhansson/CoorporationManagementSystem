@@ -46,6 +46,11 @@ namespace CooperationApp.Services
             return _personRepository.GetAllPeople().OrderBy(c => c.FullName).ToList();
         }
 
+        public List<Person> GetAllUnemployed()
+        {
+            return _personRepository.GetAllUnemployed().OrderBy(c => c.FullName).ToList();
+        }
+
         public string PeopleAmount()
         {
             var peopleAmount = _personRepository.GetAllPeople().Count;

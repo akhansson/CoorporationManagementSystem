@@ -1,4 +1,5 @@
 ﻿using System;
+using CooperationApp.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace CooperationApp.UserControls
     /// </summary>
     public partial class UnemployedControl : UserControl
     {
+        private PersonService _personService;
+
         public UnemployedControl()
         {
+            _personService = new PersonService();
+
             InitializeComponent();
+
+            DisplayCompaniesFromDatabase();
+        }
+
+        public void DisplayCompaniesFromDatabase()
+        {
+            var unemployed = _personService.GetAllUnemployed();
+            unemployedListView.ItemsSource = unemployed;
         }
     }
 }

@@ -40,6 +40,7 @@ namespace CooperationApp.UserControls
                     saveCompanyButton.IsEnabled = true;
                 }
             };
+
             InitializeComponent();
         }
 
@@ -67,11 +68,7 @@ namespace CooperationApp.UserControls
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
-
         
-
         public void showCompaniesButton_Click(object sender, RoutedEventArgs e)
         {
             var companiesWindow = new DisplayCompanies();
