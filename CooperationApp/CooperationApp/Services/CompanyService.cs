@@ -76,11 +76,18 @@ namespace CooperationApp.Services
             return _companyRepository.GetAllCompanies().OrderBy(c => c.CompanyName).ToList();
         }
         
+        public List<Company> SearchCompany(string searchString)
+        {
+            return _companyRepository.SearchCompany(searchString);
+        }
+
         public string CompanyAmount()
         {
             var companyAmount = GetAllCompanies().Count;
 
             return $"{companyAmount} companies in the database";
         }
+
+        
     }
 }

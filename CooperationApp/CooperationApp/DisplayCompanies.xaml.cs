@@ -53,12 +53,12 @@ namespace CooperationApp
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var companies = _companyService.GetAllCompanies();
+            var companies = _companyService.SearchCompany(searchTextBox.Text);
 
-            var searchTextBox = sender as TextBox;
-            var filteredList = companies.Where(c => c.CompanyName.ToLower().Contains(searchTextBox.Text.ToLower())).ToList();
+           //var filteredList = companies.Where(c => c.CompanyName.IndexOf(searchTextBox.Text, StringComparison.CurrentCultureIgnoreCase) > -1).ToList();
 
-            companiesListView.ItemsSource = filteredList;
+            companiesListView.ItemsSource = companies;
         }
+
     }
 }
