@@ -106,7 +106,7 @@
                   HorizontalAlignment="Stretch"
                   Grid.Column="1"
                   Grid.Row="2"
-                  Background="#dedede">
+                  >
 
         </ListView>
     </Grid>
