@@ -116,7 +116,8 @@ namespace CooperationApp.UserControls
             try
             {
                 var selectedCompany = companyPickerComboBox.SelectedItem as Company;
-                DisplayEmployeesFromDatabase(selectedCompany);
+                if(selectedCompany != null)
+                    DisplayEmployeesFromDatabase(selectedCompany);
             }
             catch (Exception ex)
             {
