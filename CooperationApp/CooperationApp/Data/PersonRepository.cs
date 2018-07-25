@@ -64,6 +64,15 @@ namespace CooperationApp.Data
             }
         }
 
+        public List<Person> GetEmployees(Company company)
+        {
+            using (var personConnection = CreateConnection())
+            {
+                personConnection.CreateTable<Person>();
+                return personConnection.Table<Person>().Where(c => c.CompanyId == company.Id).ToList();
+            }
+        }
+
         private SQLiteConnection CreateConnection()
         {
             return new SQLiteConnection(_databasePath);

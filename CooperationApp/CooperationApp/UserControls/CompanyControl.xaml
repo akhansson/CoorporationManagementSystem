@@ -50,7 +50,8 @@
 
             <ComboBox x:Name="companyPickerComboBox"
                       VerticalAlignment="Center"
-                      Width="200"/>
+                      Width="200"
+                      SelectionChanged="companyPickerComboBox_SelectionChanged"/>
         </StackPanel>
 
 
