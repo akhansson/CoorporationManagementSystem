@@ -46,6 +46,7 @@ namespace CooperationApp.UserControls
                     CompanyId = selectedCompany?.Id
                 });
                 nameTextBox.Text = null;
+
             }
             catch (ArgumentException ex)
             {
