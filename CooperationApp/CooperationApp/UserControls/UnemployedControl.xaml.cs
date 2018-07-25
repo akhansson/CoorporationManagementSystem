@@ -29,13 +29,18 @@ namespace CooperationApp.UserControls
 
             InitializeComponent();
 
-            DisplayCompaniesFromDatabase();
+            DisplayUnemployedFromDatabase();
         }
 
-        public void DisplayCompaniesFromDatabase()
+        public void DisplayUnemployedFromDatabase()
         {
             var unemployed = _personService.GetAllUnemployed();
-            unemployedListView.ItemsSource = unemployed;
+            unemployedListView.ItemsSource = unemployed.Select(c => c.FullName);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            DisplayUnemployedFromDatabase();
         }
     }
 }
