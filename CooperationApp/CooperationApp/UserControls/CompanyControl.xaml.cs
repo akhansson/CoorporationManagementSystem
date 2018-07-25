@@ -27,10 +27,12 @@ namespace CooperationApp.UserControls
     public partial class CompanyControl : UserControl
     {
         private CompanyService _companyService;
+        private PersonService _personService;
 
         public CompanyControl()
         {
             _companyService = new CompanyService();
+            _personService = new PersonService();
 
             _companyService.Event.OnEvent += (object source, EventArgs e) => {
 
@@ -48,6 +50,13 @@ namespace CooperationApp.UserControls
         {
             var companies = _companyService.GetAllCompanies();
             companyPickerComboBox.ItemsSource = companies;
+        }
+
+        public void DisplayEmployeesFromDatabase()
+        {
+            var employedPeople = _personService.GetAllUnemployed();
+            employeeListView.ItemsSource = employedPeople.Select(c => c.FullName);
+            //unemployedListView.ItemsSource = unemployed.Select(c => c.FullName);
         }
 
         private async void saveCompanyButton_Click(object sender, RoutedEventArgs e)
@@ -101,6 +110,11 @@ namespace CooperationApp.UserControls
         private void setCompanyAmountLabel()
         {
             companyAmountLabel.Content = _companyService.CompanyAmount();
+        }
+
+        private void companyPickerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayEmployeesFromDatabase();
         }
     }
 }
