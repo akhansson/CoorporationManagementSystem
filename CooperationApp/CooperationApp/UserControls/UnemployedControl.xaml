@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <Label Background="{StaticResource headerBackgroundColor}"
-               Content="Unemployed People"
+               Content="Unemployed"
                HorizontalAlignment="Stretch"
                HorizontalContentAlignment="Center"
                FontSize="20"/>

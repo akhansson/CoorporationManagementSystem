@@ -82,7 +82,6 @@
                        Grid.Row="4"
                        FontWeight="Bold"/>
             </Grid>
-            
         </StackPanel>
     </Grid>
 </UserControl>

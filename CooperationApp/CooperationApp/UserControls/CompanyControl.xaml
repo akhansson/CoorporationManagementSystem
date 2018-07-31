@@ -25,7 +25,7 @@
                HorizontalContentAlignment="Center"
                FontSize="20"/>
         <Label Background="{StaticResource headerBackgroundColor}"
-               Content="Display Employees"
+               Content="Employees"
                HorizontalAlignment="Stretch"
                HorizontalContentAlignment="Center"
                FontSize="20"
