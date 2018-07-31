@@ -95,6 +95,7 @@
     <Compile Include="DisplayCompanies.xaml.cs">
       <DependentUpon>DisplayCompanies.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyPerson.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\PersonService.cs" />

@@ -37,9 +37,10 @@ namespace CooperationApp
             DisplayPeopleFromDatabase();
         }
 
+
         public void DisplayPeopleFromDatabase()
         {
-            var people = _personService.GetAllPeople();
+            var people = _personService.GetCompanyPersons();
             personListView.ItemsSource = people;
         }
 

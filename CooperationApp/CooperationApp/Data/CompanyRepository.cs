@@ -41,10 +41,30 @@ namespace CooperationApp.Data
         {
             using (var connection = CreateConnection())
             {
-                connection.CreateTable<Company>();
-                connection.Delete(company);
+                connection.BeginTransaction();
+                try
+                {
+                    connection.CreateTable<Company>();
+
+                    var persons = connection.Table<Person>().Where(p => p.CompanyId == company.Id).ToList();
+                    foreach (var person in persons)
+                    {
+                        person.CompanyId = null;
+                    }
+                    connection.UpdateAll(persons);
+
+                    connection.Delete(company);
+
+                    connection.Commit();
+                }
+                catch (Exception)
+                {
+                    connection.Rollback();
+                    throw;
+                }
             }
         }
+
 
         public List<Company> GetAllCompanies()
         {

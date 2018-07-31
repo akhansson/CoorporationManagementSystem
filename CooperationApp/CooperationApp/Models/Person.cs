@@ -13,4 +13,5 @@ namespace CooperationApp.Models
         [ForeignKey(typeof(Company))]
         public int? CompanyId { get; set; }
     }
+
 }

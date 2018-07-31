@@ -92,6 +92,7 @@ namespace CooperationApp.UserControls
             displayCompanies.CompanyDeleted += OnCompanyDeleted;
 
             displayCompanies.ShowDialog();
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -111,7 +112,13 @@ namespace CooperationApp.UserControls
             {
                 var selectedCompany = companyPickerComboBox.SelectedItem as Company;
                 if(selectedCompany != null)
+                {
                     DisplayEmployeesFromDatabase(selectedCompany);
+                }
+                else
+                {
+                    employeeListView.ItemsSource = null;
+                }
             }
             catch (Exception ex)
             {
@@ -122,6 +129,10 @@ namespace CooperationApp.UserControls
         public void OnCompanyDeleted(object source, EventArgs e)
         {
             setCompanyAmountLabel();
+
+            employeeListView.ItemsSource = null;
+            PopulateCompaniesComboBox();
+
         }
     }
 }

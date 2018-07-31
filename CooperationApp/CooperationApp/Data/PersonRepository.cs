@@ -55,6 +55,29 @@ namespace CooperationApp.Data
             }
         }
 
+        public List<CompanyPerson> GetCompanyPersons()
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.CreateTable<Company>();
+                connection.CreateTable<Person>();
+
+                var query =
+                    from person in connection.Table<Person>()
+                    join company in connection.Table<Company>() on person.CompanyId equals company.Id into companies
+                    from company in companies.DefaultIfEmpty()
+                    select new CompanyPerson
+                    {
+                        Id = person.Id,
+                        FullName = person.FullName,
+                        CompanyId = company?.Id,
+                        CompanyName = company?.CompanyName
+                    };
+
+                return query.ToList();
+            }
+        }
+
         public List<Person> GetAllUnemployed()
         {
             using (var personConnection = CreateConnection())

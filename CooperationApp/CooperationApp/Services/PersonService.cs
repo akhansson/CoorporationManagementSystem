@@ -51,6 +51,12 @@ namespace CooperationApp.Services
             return _personRepository.GetAllPeople().OrderBy(c => c.FullName).ToList();
         }
 
+        public List<CompanyPerson> GetCompanyPersons()
+        {
+            return _personRepository.GetCompanyPersons();
+        }
+
+
         public List<Person> GetAllUnemployed()
         {
             return _personRepository.GetAllUnemployed().OrderBy(c => c.FullName).ToList();
