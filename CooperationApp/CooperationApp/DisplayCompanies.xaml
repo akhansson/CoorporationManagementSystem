@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="DisplayCompanies" Height="450" Width="400"
         MinWidth="400" MaxWidth="600"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
     
     <Grid>
         <Grid.RowDefinitions>

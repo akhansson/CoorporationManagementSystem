@@ -32,7 +32,6 @@ namespace CooperationApp
         {
             _companyService = new CompanyService();
             InitializeComponent();
-            DisplayCompaniesFromDatabase();
         }
 
         private void DisplayCompaniesFromDatabase()
@@ -61,6 +60,11 @@ namespace CooperationApp
            //var filteredList = companies.Where(c => c.CompanyName.IndexOf(searchTextBox.Text, StringComparison.CurrentCultureIgnoreCase) > -1).ToList();
 
             companiesListView.ItemsSource = companies;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DisplayCompaniesFromDatabase();
         }
 
         public virtual void OnCompanyDeleted()

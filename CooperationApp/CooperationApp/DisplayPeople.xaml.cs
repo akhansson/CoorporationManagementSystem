@@ -33,8 +33,6 @@ namespace CooperationApp
             _personService = new PersonService();
 
             InitializeComponent();
-
-            DisplayPeopleFromDatabase();
         }
 
 
@@ -53,6 +51,12 @@ namespace CooperationApp
             DisplayPeopleFromDatabase();
 
             OnPersonDeleted();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DisplayPeopleFromDatabase();
+
         }
 
         public virtual void OnPersonDeleted()
