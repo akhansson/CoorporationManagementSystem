@@ -26,11 +26,21 @@ namespace CooperationApp.Services
         {
             await ValidateCompany(company);
 
-            _companyRepository.AddCompany(company);
+            var companyExists = CompanyExists(company);
+            if (!companyExists)
+            {
+                _companyRepository.AddCompany(company);
 
-            MessageBox.Show("Company sucessfully added!", "Company added", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Company sucessfully added!", "Company added", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            return 1;
+                return 1;
+            }
+            else
+            {
+                MessageBox.Show("Company already exists!", "Company exists", MessageBoxButton.OK, MessageBoxImage.Hand);
+
+                return 1;
+            }
         }
 
         public void RemoveCompany(Company company)
@@ -75,7 +85,12 @@ namespace CooperationApp.Services
         {
             return _companyRepository.GetAllCompanies().OrderBy(c => c.CompanyName).ToList();
         }
-        
+
+        public bool CompanyExists(Company company)
+        {
+            return _companyRepository.CompanyExists(company);
+        }
+
         public List<Company> SearchCompany(string searchString)
         {
             return _companyRepository.SearchCompany(searchString);

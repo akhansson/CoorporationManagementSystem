@@ -74,6 +74,23 @@ namespace CooperationApp.Data
                 return companyConnection.Table<Company>().ToList();
             }
         }
+
+        public bool CompanyExists(Company company)
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.CreateTable<Company>();
+
+                var comp = connection.Table<Company>().SingleOrDefault(c => c.CompanyName.ToLowerInvariant() == company.CompanyName.ToLowerInvariant());
+
+                if (comp == null)
+                {
+                    return false;
+                }
+                else
+                    return true;
+            }
+        }
         
         private SQLiteConnection CreateConnection()
         {
