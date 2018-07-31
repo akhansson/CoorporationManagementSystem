@@ -32,8 +32,9 @@ namespace CooperationApp.UserControls
         {
             _companyService = new CompanyService();
             _personService = new PersonService();
-
+            
             InitializeComponent();
+            
         }
 
         private void savePersonButton_Click(object sender, RoutedEventArgs e)
@@ -46,6 +47,7 @@ namespace CooperationApp.UserControls
                     FullName = nameTextBox.Text,
                     CompanyId = selectedCompany?.Id
                 });
+
                 nameTextBox.Text = null;
                 setPeopleAmountLabel();
             }
@@ -68,45 +70,26 @@ namespace CooperationApp.UserControls
             companyCombobox.ItemsSource = companies;
         }
 
-        private void isEmployedCheckbox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!companyCombobox.HasItems)
-            {
-                MessageBox.Show("There are no companies registered yet!", "No companies in the database", MessageBoxButton.OK, MessageBoxImage.Error);
-                isEmployedCheckbox.IsChecked = false;
-            }
-            else
-            {
-                companyCombobox.IsEnabled = true;
-                companyCombobox.SelectedIndex = 0;
-            }
-        }
-
-        private void isEmployedCheckbox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            companyCombobox.SelectedIndex = -1;
-            companyCombobox.IsEnabled = false;
-        }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateCompanyComboBox();
-            peopleAmountLabel.Content = _personService.PeopleAmount();
+            setPeopleAmountLabel();
         }
 
         private void viewPeopleButton_Click(object sender, RoutedEventArgs e)
         {
             var displayPeople = new DisplayPeople();
-            displayPeople.Event.OnEvent += (object source, EventArgs e2) => {
 
-                var evt = (EventClassArgs)e2;
-                if (evt.Name == "deletedPeople")
-                {
-                    setPeopleAmountLabel();
-                }
-            };
+            // add subscriber method to the event
+            displayPeople.PersonDeleted += OnPersonDeleted;
 
             displayPeople.ShowDialog();
+        }
+
+        // Subscriber to the PersonDeleted event
+        public void OnPersonDeleted(object source, EventArgs e)
+        {
+            setPeopleAmountLabel();
         }
     }
 }

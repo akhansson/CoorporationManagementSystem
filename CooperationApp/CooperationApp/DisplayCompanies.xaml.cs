@@ -23,8 +23,10 @@ namespace CooperationApp
     /// </summary>
     public partial class DisplayCompanies : Window
     {
+        public delegate void OnCompanyDeletedEventHandler(object source, EventArgs e);
+        public event OnCompanyDeletedEventHandler CompanyDeleted;
+
         private CompanyService _companyService;
-        public Event Event = new Event();
 
         public DisplayCompanies()
         {
@@ -48,7 +50,7 @@ namespace CooperationApp
 
             DisplayCompaniesFromDatabase();
 
-            Event.Trigger("deletedCompany");
+            OnCompanyDeleted();
         }
         
 
@@ -61,5 +63,12 @@ namespace CooperationApp
             companiesListView.ItemsSource = companies;
         }
 
+        public virtual void OnCompanyDeleted()
+        {
+            if (CompanyDeleted != null)
+            {
+                CompanyDeleted(this, EventArgs.Empty);
+            }
+        }
     }
 }

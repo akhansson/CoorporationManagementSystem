@@ -88,14 +88,8 @@ namespace CooperationApp.UserControls
         public void showCompaniesButton_Click(object sender, RoutedEventArgs e)
         {
             var displayCompanies = new DisplayCompanies();
-            displayCompanies.Event.OnEvent += (object source, EventArgs e2) => {
 
-                var evt = (EventClassArgs)e2;
-                if (evt.Name == "deletedCompany")
-                {
-                    setCompanyAmountLabel();
-                }
-            };
+            displayCompanies.CompanyDeleted += OnCompanyDeleted;
 
             displayCompanies.ShowDialog();
         }
@@ -123,6 +117,11 @@ namespace CooperationApp.UserControls
             {
                 throw new ArgumentException();
             }
+        }
+
+        public void OnCompanyDeleted(object source, EventArgs e)
+        {
+            setCompanyAmountLabel();
         }
     }
 }

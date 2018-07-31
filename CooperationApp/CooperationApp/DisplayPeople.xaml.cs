@@ -23,9 +23,10 @@ namespace CooperationApp
     /// </summary>
     public partial class DisplayPeople : Window
     {
-        private PersonService _personService;
+        public delegate void OnPersonDeletedEventHandler(object source, EventArgs e);
+        public event OnPersonDeletedEventHandler PersonDeleted;
 
-        public Event Event = new Event();
+        private PersonService _personService;
 
         public DisplayPeople()
         {
@@ -50,9 +51,15 @@ namespace CooperationApp
 
             DisplayPeopleFromDatabase();
 
-            Event.Trigger("deletedPeople");
+            OnPersonDeleted();
         }
 
-        
+        public virtual void OnPersonDeleted()
+        {
+            if (PersonDeleted != null)
+            {
+                PersonDeleted(this, EventArgs.Empty);
+            }
+        }
     }
 }
