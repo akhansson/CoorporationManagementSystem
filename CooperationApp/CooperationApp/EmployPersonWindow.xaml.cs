@@ -57,6 +57,8 @@ namespace CooperationApp
                 _personService.EmployPerson(selectedPerson, selectedCompany.Id);
 
                 OnPersonEmployed();
+                employButton.IsEnabled = false;
+
             }
             catch (ArgumentException ex)
             {
@@ -68,6 +70,11 @@ namespace CooperationApp
         {
             if (PersonEmployed != null)
                 PersonEmployed(this, EventArgs.Empty);
+        }
+
+        private void employComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            employButton.IsEnabled = true;
         }
     }
 }
