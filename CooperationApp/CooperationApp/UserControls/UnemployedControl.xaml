@@ -11,6 +11,7 @@
     <Grid Background="{StaticResource gridColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -20,8 +21,23 @@
                HorizontalContentAlignment="Center"
                FontSize="20"/>
 
+        <Grid Background="{StaticResource headerBackgroundColor}"
+              Grid.Row="1"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right">
+
+            <Button x:Name="employButton"
+                    Content="Employ"
+                    Width="80"
+                    Height="20"
+                    Margin="10 5"
+                    Click="employButton_Click"/>
+        </StackPanel>
+        
         <ListView x:Name="unemployedListView"
-                  Grid.Row="1">
+                  Grid.Row="2">
             
         </ListView>
     </Grid>

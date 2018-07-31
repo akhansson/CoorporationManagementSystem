@@ -78,6 +78,34 @@ namespace CooperationApp.Data
             }
         }
 
+        public void EmployPerson(string person, int companyId)
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.BeginTransaction();
+                try
+                {
+                    connection.CreateTable<Person>();
+
+                    var selectedPerson = connection.Table<Person>().Where(p => p.FullName == person).ToList();
+
+                    foreach (var p in selectedPerson)
+                    {
+                        p.CompanyId = companyId;
+                    }
+
+                    connection.UpdateAll(selectedPerson);
+
+                    connection.Commit();
+                }
+                catch (Exception)
+                {
+                    connection.Rollback();
+                    throw;
+                }
+            }
+        }
+
         public List<Person> GetAllUnemployed()
         {
             using (var personConnection = CreateConnection())

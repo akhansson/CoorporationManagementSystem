@@ -120,7 +120,7 @@ namespace CooperationApp.UserControls
                     employeeListView.ItemsSource = null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new ArgumentException();
             }

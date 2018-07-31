@@ -33,6 +33,11 @@ namespace CooperationApp.Services
             _personRepository.RemovePerson(person);
         }
 
+        public void EmployPerson(string person, int companyId)
+        {
+            _personRepository.EmployPerson(person, companyId);
+        }
+
         private void ValidatePerson(Person person)
         {
             // Outputting an error message if no name was provided or white spaces

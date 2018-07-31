@@ -90,6 +90,9 @@
     <Compile Include="EditCompany.xaml.cs">
       <DependentUpon>EditCompany.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmployPersonWindow.xaml.cs">
+      <DependentUpon>EmployPersonWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Events\Event.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="DisplayCompanies.xaml.cs">
@@ -117,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditCompany.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployPersonWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

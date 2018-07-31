@@ -21,6 +21,7 @@ namespace CooperationApp.UserControls
     /// </summary>
     public partial class UnemployedControl : UserControl
     {
+        
         private PersonService _personService;
 
         public UnemployedControl()
@@ -39,6 +40,27 @@ namespace CooperationApp.UserControls
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            DisplayUnemployedFromDatabase();
+        }
+
+        private void employButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (unemployedListView.SelectedIndex == -1)
+                MessageBox.Show("Select a person first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                var selectedName = unemployedListView.SelectedItem as string;
+                var employPersonWindow = new EmployPersonWindow(selectedName);
+
+                employPersonWindow.PersonEmployed += OnPersonEmployed;
+                
+
+                employPersonWindow.ShowDialog();
+            }
+        }
+
+        public void OnPersonEmployed(object source, EventArgs e)
         {
             DisplayUnemployedFromDatabase();
         }
