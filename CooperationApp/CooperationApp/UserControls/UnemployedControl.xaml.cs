@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CooperationApp.Models;
 
 namespace CooperationApp.UserControls
 {
@@ -36,13 +37,10 @@ namespace CooperationApp.UserControls
         public void DisplayUnemployedFromDatabase()
         {
             var unemployed = _personService.GetAllUnemployed();
-            unemployedListView.ItemsSource = unemployed.Select(c => c.FullName);
+            unemployedListView.ItemsSource = unemployed;
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            DisplayUnemployedFromDatabase();
-        }
+        
 
         private void employButton_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +48,7 @@ namespace CooperationApp.UserControls
                 MessageBox.Show("Select a person first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
-                var selectedName = unemployedListView.SelectedItem as string;
+                var selectedName = unemployedListView.SelectedItem as Person;
                 var employPersonWindow = new EmployPersonWindow(selectedName);
 
                 employPersonWindow.PersonEmployed += OnPersonEmployed;
@@ -58,6 +56,11 @@ namespace CooperationApp.UserControls
 
                 employPersonWindow.ShowDialog();
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            DisplayUnemployedFromDatabase();
         }
 
         public void OnPersonEmployed(object source, EventArgs e)

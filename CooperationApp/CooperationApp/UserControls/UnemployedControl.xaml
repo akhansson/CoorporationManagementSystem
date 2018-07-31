@@ -38,7 +38,12 @@
         
         <ListView x:Name="unemployedListView"
                   Grid.Row="2">
-            
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Unemployed"
+                                    DisplayMemberBinding="{Binding FullName}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </UserControl>

@@ -24,15 +24,18 @@ namespace CooperationApp
         public delegate void OnPersonEmployedEventHandler(object source, EventArgs e);
         public event OnPersonEmployedEventHandler PersonEmployed;
 
+        Person selectedPerson;
+
         private CompanyService _companyService;
         private PersonService _personService;
 
-        public EmployPersonWindow(string personName)
+        public EmployPersonWindow(Person personName)
         {
             _companyService = new CompanyService();
             _personService = new PersonService();
             InitializeComponent();
-            personNameLabel.Content = personName;
+            selectedPerson = personName;
+            personNameLabel.Content = selectedPerson.FullName;
         }
 
         public void PopulateCompaniesComboBox()
@@ -51,10 +54,10 @@ namespace CooperationApp
         {
             try
             {
-                var selectedPerson = personNameLabel.Content as string;
+                
                 var selectedCompany = employComboBox.SelectedItem as Company;
 
-                _personService.EmployPerson(selectedPerson, selectedCompany.Id);
+                _personService.EmployPerson(selectedPerson.Id, selectedCompany.Id);
 
                 OnPersonEmployed();
                 employButton.IsEnabled = false;

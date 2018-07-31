@@ -33,9 +33,9 @@ namespace CooperationApp.Services
             _personRepository.RemovePerson(person);
         }
 
-        public void EmployPerson(string person, int companyId)
+        public void EmployPerson(int id, int companyId)
         {
-            _personRepository.EmployPerson(person, companyId);
+            _personRepository.EmployPerson(id, companyId);
         }
 
         private void ValidatePerson(Person person)

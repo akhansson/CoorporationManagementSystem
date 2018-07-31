@@ -78,7 +78,7 @@ namespace CooperationApp.Data
             }
         }
 
-        public void EmployPerson(string person, int companyId)
+        public void EmployPerson(int id, int companyId)
         {
             using (var connection = CreateConnection())
             {
@@ -87,7 +87,7 @@ namespace CooperationApp.Data
                 {
                     connection.CreateTable<Person>();
 
-                    var selectedPerson = connection.Table<Person>().Where(p => p.FullName == person).ToList();
+                    var selectedPerson = connection.Table<Person>().Where(p => p.Id == id).ToList();
 
                     foreach (var p in selectedPerson)
                     {
