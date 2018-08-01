@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CooperationApp"
         mc:Ignorable="d"
-        Title="DisplayCompanies" Height="450" Width="400"
+        Title="Companies" Height="450" Width="400"
         MinWidth="400" MaxWidth="600"
         WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        Icon="/Resources/company.png">
     
     <Grid>
         <Grid.RowDefinitions>
