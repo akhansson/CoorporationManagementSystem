@@ -99,12 +99,13 @@ namespace CooperationApp.Data
 
         public List<Company> SearchCompany(string searchString)
         {
-            using (var companyConnection = CreateConnection())
+            using (var connection = CreateConnection())
             {
-                companyConnection.CreateTable<Company>();
-                return companyConnection.Table<Company>()
-                    .Where(c => c.CompanyName.Contains(searchString))
-                    .ToList();
+                connection.CreateTable<Company>();
+
+                return connection.Table<Company>()
+                       .Where(c => c.CompanyName.ToUpper().Contains(searchString.ToUpper()))
+                       .ToList();
             }
         }
     }

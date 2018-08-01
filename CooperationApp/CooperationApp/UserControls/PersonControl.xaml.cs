@@ -68,6 +68,7 @@ namespace CooperationApp.UserControls
         {
             var companies = _companyService.GetAllCompanies();
             companyCombobox.ItemsSource = companies;
+            
             companyCombobox.SelectedIndex = -1;
         }
 
