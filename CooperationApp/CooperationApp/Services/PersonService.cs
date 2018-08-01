@@ -72,6 +72,11 @@ namespace CooperationApp.Services
             return _personRepository.GetEmployees(company).OrderBy(c => c.FullName).ToList();
         }
 
+        public List<CompanyPerson> SearchCompanyPerson(string searchString)
+        {
+            return _personRepository.SearchCompanyPerson(searchString);
+        }
+
         public string PeopleAmount()
         {
             var peopleAmount = _personRepository.GetAllPeople().Count;

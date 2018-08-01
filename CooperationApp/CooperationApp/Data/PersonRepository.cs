@@ -124,6 +124,29 @@ namespace CooperationApp.Data
             }
         }
 
+        public List<CompanyPerson> SearchCompanyPerson(string searchString)
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.CreateTable<Company>();
+                connection.CreateTable<Person>();
+
+                var query =
+                    from person in connection.Table<Person>()
+                    join company in connection.Table<Company>() on person.CompanyId equals company.Id into companies
+                    from company in companies.DefaultIfEmpty()
+                    select new CompanyPerson
+                    {
+                        Id = person.Id,
+                        FullName = person.FullName,
+                        CompanyId = company?.Id,
+                        CompanyName = company?.CompanyName
+                    };
+
+                return query.Where(p => p.FullName.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+        }
+
         private SQLiteConnection CreateConnection()
         {
             return new SQLiteConnection(_databasePath);

@@ -73,5 +73,12 @@ namespace CooperationApp
                 PersonDeleted(this, EventArgs.Empty);
             }
         }
+
+        private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var people = _personService.SearchCompanyPerson(searchTextBox.Text);
+
+            personListView.ItemsSource = people;
+        }
     }
 }
