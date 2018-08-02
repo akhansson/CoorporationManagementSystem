@@ -74,7 +74,7 @@ namespace CooperationApp.Data
                         CompanyName = company?.CompanyName
                     };
 
-                return query.ToList();
+                return query.OrderBy(c => c.CompanyName).ThenBy(p => p.FullName).ToList();
             }
         }
 
