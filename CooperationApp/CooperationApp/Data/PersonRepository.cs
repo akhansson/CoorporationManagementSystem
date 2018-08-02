@@ -13,22 +13,12 @@ namespace CooperationApp.Data
 
     public class PersonRepository : IPersonRepository
     {
-        // The path of the database
-        const string DATABASE_NAME = "Coorporation.db";
-        private readonly string _databasePath;
-
-        public PersonRepository()
-        {
-            //var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var folderPath = "";
-            _databasePath = System.IO.Path.Combine(folderPath, DATABASE_NAME);
-        }
 
         public void AddPerson(Person person)
         {
             // Initialize the SQLite connection
             // The "using" statement takes care of closing the connection"
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 // Create a table of the type Person
                 connection.CreateTable<Person>();
@@ -39,7 +29,7 @@ namespace CooperationApp.Data
 
         public void RemovePerson(Person person)
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.CreateTable<Person>();
                 connection.Delete(person);
@@ -48,7 +38,7 @@ namespace CooperationApp.Data
 
         public List<Person> GetAllPeople()
         {
-            using (var personConnection = CreateConnection())
+            using (var personConnection = DbSQLite.CreateConnection())
             {
                 personConnection.CreateTable<Person>();
                 return personConnection.Table<Person>().ToList();
@@ -57,7 +47,7 @@ namespace CooperationApp.Data
 
         public List<CompanyPerson> GetCompanyPersons()
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.CreateTable<Company>();
                 connection.CreateTable<Person>();
@@ -80,7 +70,7 @@ namespace CooperationApp.Data
 
         public void EmployPerson(int id, int companyId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.BeginTransaction();
                 try
@@ -108,7 +98,7 @@ namespace CooperationApp.Data
 
         public List<Person> GetAllUnemployed()
         {
-            using (var personConnection = CreateConnection())
+            using (var personConnection = DbSQLite.CreateConnection())
             {
                 personConnection.CreateTable<Person>();
                 return personConnection.Table<Person>().Where(c => c.CompanyId == null).ToList();
@@ -117,7 +107,7 @@ namespace CooperationApp.Data
 
         public List<Person> GetEmployees(Company company)
         {
-            using (var personConnection = CreateConnection())
+            using (var personConnection = DbSQLite.CreateConnection())
             {
                 personConnection.CreateTable<Person>();
                 return personConnection.Table<Person>().Where(c => c.CompanyId == company.Id).ToList();
@@ -126,7 +116,7 @@ namespace CooperationApp.Data
 
         public List<CompanyPerson> SearchCompanyPerson(string searchString)
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.CreateTable<Company>();
                 connection.CreateTable<Person>();
@@ -147,9 +137,6 @@ namespace CooperationApp.Data
             }
         }
 
-        private SQLiteConnection CreateConnection()
-        {
-            return new SQLiteConnection(_databasePath);
-        }
+
     }
 }
