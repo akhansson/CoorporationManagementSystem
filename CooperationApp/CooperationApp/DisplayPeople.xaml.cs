@@ -44,16 +44,22 @@ namespace CooperationApp
 
         private void deletePersonButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedCompanyPerson = personListView.SelectedItem as CompanyPerson;
+            var selectedCompanyPeople = personListView.SelectedItems;
 
-            Person selectedPerson = new Person()
+            foreach (var p in selectedCompanyPeople)
             {
-                Id = selectedCompanyPerson.Id,
-                FullName = selectedCompanyPerson.FullName,
-                CompanyId = selectedCompanyPerson.CompanyId
-            };
+                var person1 = p as CompanyPerson;
 
-            _personService.RemovePerson(selectedPerson);
+                Person newPerson = new Person()
+                {
+                    Id = person1.Id,
+                    FullName = person1.FullName,
+                    CompanyId = person1.CompanyId
+                };
+
+                _personService.RemovePerson(newPerson);
+            }
+            
 
             DisplayPeopleFromDatabase();
 

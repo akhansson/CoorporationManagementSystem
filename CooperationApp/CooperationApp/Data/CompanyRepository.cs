@@ -82,11 +82,16 @@ namespace CooperationApp.Data
                 connection.CreateTable<Company>();
                 connection.CreateTable<Person>();
 
+                //var cmdTxt = "SELECT Company.CompanyName,Person.FullName, Person.CompanyId, COUNT(Person.CompanyId) as EmployeeCount FROM Person inner JOIN Company ON person.CompanyId = Company.Id where Company.CompanyName is not null GROUP BY Company.CompanyName";
+
+                //connection.CreateCommand(cmdTxt);
+
+
+
                 var query =
                     from company in connection.Table<Company>()
                     select new CompanyCount
                     {
-                        Id = (int)company.Id,
                         CompanyName = company.CompanyName,
                         NumberOfPersons = connection.Table<Person>().Count(p => p.CompanyId == company.Id)
                     };
