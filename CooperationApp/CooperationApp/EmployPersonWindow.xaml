@@ -19,7 +19,8 @@
         
         <Grid Background="{StaticResource headerBackgroundColor}">
             <Viewbox MaxHeight="50"
-                     MinHeight="50">
+                     MinHeight="50"
+                     MaxWidth="400">
                 <TextBlock x:Name="personNameLabel"
                            FontStretch="Condensed">
                     
