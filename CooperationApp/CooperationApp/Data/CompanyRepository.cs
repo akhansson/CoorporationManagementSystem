@@ -86,7 +86,7 @@ namespace CooperationApp.Data
                     from company in connection.Table<Company>()
                     select new CompanyCount
                     {
-                        Id = company.Id,
+                        Id = (int)company.Id,
                         CompanyName = company.CompanyName,
                         NumberOfPersons = connection.Table<Person>().Count(p => p.CompanyId == company.Id)
                     };

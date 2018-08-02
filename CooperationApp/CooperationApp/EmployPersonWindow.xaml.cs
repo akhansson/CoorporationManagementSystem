@@ -57,7 +57,7 @@ namespace CooperationApp
                 
                 var selectedCompany = employComboBox.SelectedItem as Company;
 
-                _personService.EmployPerson(selectedPerson.Id, selectedCompany.Id);
+                _personService.EmployPerson(selectedPerson.Id, (int)selectedCompany.Id);
 
                 OnPersonEmployed();
                 employButton.IsEnabled = false;

@@ -45,7 +45,7 @@ namespace CooperationApp.Services
             {
                 throw new ArgumentException("You didn't provide a name.", "Error: Name wasn't provided");
             }
-            if (!Regex.IsMatch(person.FullName, @"^[A-Za-zÅÄÖåäö ]+$"))
+            if (!Regex.IsMatch(person.FullName, @"^[A-Za-zÅÄÖÉåäöé ]+$"))
             {
                 throw new ArgumentException("You can only write letters and spaces!", "Error: Unsupported characters provided");
             }

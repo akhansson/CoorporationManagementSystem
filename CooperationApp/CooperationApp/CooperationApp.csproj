@@ -83,6 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\CompanyHttp.cs" />
     <Compile Include="Data\CompanyRepository.cs" />
+    <Compile Include="Data\DbSQLite.cs" />
     <Compile Include="Data\PersonRepository.cs" />
     <Compile Include="DisplayPeople.xaml.cs">
       <DependentUpon>DisplayPeople.xaml</DependentUpon>

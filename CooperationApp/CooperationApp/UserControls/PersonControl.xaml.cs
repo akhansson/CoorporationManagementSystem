@@ -67,7 +67,9 @@ namespace CooperationApp.UserControls
         public void PopulateCompanyComboBox()
         {
             var companies = _companyService.GetAllCompanies();
-            companies.Insert(0, new Company() { CompanyName = null });
+
+            companies.Insert(0, new Company() { Id=null, CompanyName=null});
+
             companyCombobox.ItemsSource = companies;
             
             companyCombobox.SelectedIndex = -1;
