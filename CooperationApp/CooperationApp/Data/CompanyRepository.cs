@@ -75,6 +75,26 @@ namespace CooperationApp.Data
             }
         }
 
+        public List<CompanyCount> AmountOfEmployees()
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.CreateTable<Company>();
+                connection.CreateTable<Person>();
+
+                var query =
+                    from company in connection.Table<Company>()
+                    select new CompanyCount
+                    {
+                        Id = company.Id,
+                        CompanyName = company.CompanyName,
+                        NumberOfPersons = connection.Table<Person>().Count(p => p.CompanyId == company.Id)
+                    };
+
+                return query.ToList();
+            }
+        }
+
         public bool CompanyExists(Company company)
         {
             using (var connection = CreateConnection())

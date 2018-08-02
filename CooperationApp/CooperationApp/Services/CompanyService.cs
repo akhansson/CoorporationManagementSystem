@@ -91,6 +91,11 @@ namespace CooperationApp.Services
             return _companyRepository.CompanyExists(company);
         }
 
+        public List<CompanyCount> AmountOfEmployees()
+        {
+            return _companyRepository.AmountOfEmployees();
+        }
+
         public List<Company> SearchCompany(string searchString)
         {
             return _companyRepository.SearchCompany(searchString);

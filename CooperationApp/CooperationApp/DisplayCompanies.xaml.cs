@@ -36,16 +36,22 @@ namespace CooperationApp
 
         private void DisplayCompaniesFromDatabase()
         {
-            var companies = _companyService.GetAllCompanies();
-            companiesListView.ItemsSource = companies;
+            var companiesAndAmountOfEmployees = _companyService.AmountOfEmployees();
+            companiesListView.ItemsSource = companiesAndAmountOfEmployees;
         }
         
 
         private void deleteCompanyButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedCompany = companiesListView.SelectedItem as Company;
-            
-            _companyService.RemoveCompany(selectedCompany);
+            var selectedCompany = companiesListView.SelectedItem as CompanyCount;
+
+            Company company = new Company()
+            {
+                Id = selectedCompany.Id,
+                CompanyName = selectedCompany.CompanyName
+            };
+
+            _companyService.RemoveCompany(company);
 
             DisplayCompaniesFromDatabase();
 

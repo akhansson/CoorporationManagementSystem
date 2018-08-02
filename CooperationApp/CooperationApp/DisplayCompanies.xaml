@@ -40,7 +40,8 @@
                     <GridViewColumn Header="Company"
                                     DisplayMemberBinding="{Binding CompanyName}">
                     </GridViewColumn>
-                    <GridViewColumn Header="Amount of Employees">
+                    <GridViewColumn Header="Employee Amount"
+                                    DisplayMemberBinding="{Binding NumberOfPersons}">
 
                     </GridViewColumn>
                 </GridView>
