@@ -92,7 +92,7 @@ namespace CooperationApp.Data
                         //NumberOfPersons = connection.Table<Person>().Count(p => p.CompanyId == company.Id)
                     };
 
-                return query.ToList();
+                return query.OrderBy(c => c.CompanyName).ToList();
             }
         }
 
