@@ -38,6 +38,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Company"
+                                    Width="auto"
                                     DisplayMemberBinding="{Binding CompanyName}">
                     </GridViewColumn>
                     <GridViewColumn Header="Employee Amount"
