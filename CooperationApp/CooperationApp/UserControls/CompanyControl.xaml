@@ -45,9 +45,6 @@
             <ComboBox x:Name="companyPickerComboBox"
                       VerticalAlignment="Center"
                       Width="200"
-                      ItemsSource="{Binding Company}"
-                      SelectedValue="{Binding CompanyName, Mode=TwoWay}"
-                      DisplayMemberPath="CompanyName"
                       SelectionChanged="companyPickerComboBox_SelectionChanged"/>
             <Button x:Name="employButton"
                     Content="Change"
