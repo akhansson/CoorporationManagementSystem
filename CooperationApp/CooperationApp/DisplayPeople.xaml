@@ -36,11 +36,11 @@
                   Grid.Row="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name"
+                    <GridViewColumn Header="Name" Width="200"
                                     DisplayMemberBinding="{Binding FullName}">
                         
                     </GridViewColumn>
-                    <GridViewColumn Header="Company"
+                    <GridViewColumn Header="Company" Width="200"
                                     DisplayMemberBinding="{Binding CompanyName}">
 
                     </GridViewColumn>

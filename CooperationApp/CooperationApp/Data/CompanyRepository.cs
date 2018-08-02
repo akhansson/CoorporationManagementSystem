@@ -12,23 +12,12 @@ namespace CooperationApp.Data
 
     public class CompanyRepository : ICompanyRepository
     {
-        // The path of the database
-        const string DATABASE_NAME = "Coorporation.db";
-        private readonly string _databasePath;
-
-        public CompanyRepository()
-        {
-            //var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var folderPath = "";
-            _databasePath = System.IO.Path.Combine(folderPath, DATABASE_NAME);
-        }
-
 
         public void AddCompany(Company company)
         {
             // Initialize the SQLite connection
             // The "using" statement takes care of closing the connection"
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 // Create a table of the type Person
                 connection.CreateTable<Company>();
@@ -39,7 +28,7 @@ namespace CooperationApp.Data
 
         public void RemoveCompany(Company company)
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.BeginTransaction();
                 try
@@ -68,7 +57,7 @@ namespace CooperationApp.Data
 
         public List<Company> GetAllCompanies()
         {
-            using (var companyConnection = CreateConnection())
+            using (var companyConnection = DbSQLite.CreateConnection())
             {
                 companyConnection.CreateTable<Company>();
                 return companyConnection.Table<Company>().ToList();
@@ -77,32 +66,23 @@ namespace CooperationApp.Data
 
         public List<CompanyCount> AmountOfEmployees()
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.CreateTable<Company>();
                 connection.CreateTable<Person>();
 
-                //var cmdTxt = "SELECT Company.CompanyName,Person.FullName, Person.CompanyId, COUNT(Person.CompanyId) as EmployeeCount FROM Person inner JOIN Company ON person.CompanyId = Company.Id where Company.CompanyName is not null GROUP BY Company.CompanyName";
 
-                //connection.CreateCommand(cmdTxt);
+                List<CompanyCount> query = connection.Query<CompanyCount>("SELECT Company.CompanyName, Person.CompanyId as Id, COUNT(Person.CompanyId) as NumberOfPersons  FROM Person inner JOIN Company ON person.CompanyId = Company.Id where Company.CompanyName is not null GROUP BY Company.CompanyName");
+                
 
 
-
-                var query =
-                    from company in connection.Table<Company>()
-                    select new CompanyCount
-                    {
-                        CompanyName = company.CompanyName,
-                        NumberOfPersons = connection.Table<Person>().Count(p => p.CompanyId == company.Id)
-                    };
-
-                return query.OrderBy(c => c.CompanyName).ToList();
+                return query;
             }
         }
 
         public bool CompanyExists(Company company)
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.CreateTable<Company>();
 
@@ -117,14 +97,10 @@ namespace CooperationApp.Data
             }
         }
         
-        private SQLiteConnection CreateConnection()
-        {
-            return new SQLiteConnection(_databasePath);
-        }
-
+  
         public List<Company> SearchCompany(string searchString)
         {
-            using (var connection = CreateConnection())
+            using (var connection = DbSQLite.CreateConnection())
             {
                 connection.CreateTable<Company>();
 
