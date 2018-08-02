@@ -43,15 +43,21 @@ namespace CooperationApp
 
         private void deleteCompanyButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedCompany = companiesListView.SelectedItem as CompanyCount;
-
-            Company company = new Company()
+            var selectedCompanies = companiesListView.SelectedItems;
+            
+            foreach (var c in selectedCompanies)
             {
-                Id = selectedCompany.Id,
-                CompanyName = selectedCompany.CompanyName
-            };
+                var company1 = c as CompanyCount;
 
-            _companyService.RemoveCompany(company);
+                Company newCompany = new Company()
+                {
+                    Id = company1.Id,
+                    CompanyName = company1.CompanyName
+                };
+
+                _companyService.RemoveCompany(newCompany);
+            }
+            
 
             DisplayCompaniesFromDatabase();
 
