@@ -88,8 +88,7 @@ namespace CooperationApp.Data
                     {
                         Id = company.Id,
                         CompanyName = company.CompanyName,
-                        NumberOfPersons = connection.Table<Person>().Where(p => p.CompanyId == company.Id).Count()
-                        //NumberOfPersons = connection.Table<Person>().Count(p => p.CompanyId == company.Id)
+                        NumberOfPersons = connection.Table<Person>().Count(p => p.CompanyId == company.Id)
                     };
 
                 return query.OrderBy(c => c.CompanyName).ToList();
