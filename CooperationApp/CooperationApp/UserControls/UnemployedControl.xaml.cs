@@ -48,8 +48,9 @@ namespace CooperationApp.UserControls
                 MessageBox.Show("Select a person first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
-                var selectedName = unemployedListView.SelectedItem as Person;
-                var employPersonWindow = new EmployPersonWindow(selectedName);
+                var selectedNames = unemployedListView.SelectedItems;
+                
+                var employPersonWindow = new EmployPersonWindow(selectedNames);
 
                 employPersonWindow.PersonEmployed += OnPersonEmployed;
                 

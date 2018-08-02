@@ -16,11 +16,17 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Label Background="{StaticResource headerBackgroundColor}"
-               x:Name="personNameLabel"
-               Content="Hello"
-               FontSize="30"
-               HorizontalContentAlignment="Center"/>
+        
+        <Grid Background="{StaticResource headerBackgroundColor}">
+            <Viewbox MaxHeight="50"
+                     MinHeight="50">
+                <TextBlock x:Name="personNameLabel"
+                           FontStretch="Condensed">
+                    
+                </TextBlock>
+            </Viewbox>
+        </Grid>
+        
         <ComboBox x:Name="employComboBox"
                   Grid.Row="1"
                   HorizontalAlignment="Center"

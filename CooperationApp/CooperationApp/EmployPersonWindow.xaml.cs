@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CooperationApp.Models;
+using System.Collections;
 
 namespace CooperationApp
 {
@@ -24,18 +25,45 @@ namespace CooperationApp
         public delegate void OnPersonEmployedEventHandler(object source, EventArgs e);
         public event OnPersonEmployedEventHandler PersonEmployed;
 
-        Person selectedPerson;
+        string str;
 
         private CompanyService _companyService;
         private PersonService _personService;
 
-        public EmployPersonWindow(Person personName)
+        List<Person> people = new List<Person>();
+
+        public EmployPersonWindow(IList personNames)
         {
             _companyService = new CompanyService();
             _personService = new PersonService();
+
+            IList selectedPeople = personNames;
+
             InitializeComponent();
-            selectedPerson = personName;
-            personNameLabel.Content = selectedPerson.FullName;
+
+            
+
+            foreach (var person in selectedPeople)
+            {
+                people.Add(person as Person);
+            }
+
+            int i = 0;
+            foreach (var person in people)
+            {
+                if (i == 5)
+                {
+                    break;
+                }
+                str += person.FullName + ", ";
+                i++;
+            }
+            str = str.Remove(str.Length - 2);
+
+            if (people.Count > 5)
+                str += "...";
+            
+            personNameLabel.Text = str;
         }
 
         public void PopulateCompaniesComboBox()
@@ -54,10 +82,12 @@ namespace CooperationApp
         {
             try
             {
-                
                 var selectedCompany = employComboBox.SelectedItem as Company;
 
-                _personService.EmployPerson(selectedPerson.Id, (int)selectedCompany.Id);
+                foreach (var person in people)
+                {
+                    _personService.EmployPerson(person.Id, (int)selectedCompany.Id);
+                }
 
                 OnPersonEmployed();
                 this.Close();
@@ -72,11 +102,6 @@ namespace CooperationApp
         {
             if (PersonEmployed != null)
                 PersonEmployed(this, EventArgs.Empty);
-        }
-
-        private void employComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            employButton.IsEnabled = true;
         }
     }
 }
