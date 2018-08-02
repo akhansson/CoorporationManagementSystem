@@ -60,8 +60,7 @@ namespace CooperationApp
                 _personService.EmployPerson(selectedPerson.Id, (int)selectedCompany.Id);
 
                 OnPersonEmployed();
-                employButton.IsEnabled = false;
-
+                this.Close();
             }
             catch (ArgumentException ex)
             {
