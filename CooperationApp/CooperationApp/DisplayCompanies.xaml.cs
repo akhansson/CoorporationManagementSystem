@@ -18,12 +18,14 @@ using System.Windows.Shapes;
 
 namespace CooperationApp
 {
-    /// <summary>
-    /// Interaction logic for DisplayCompanies.xaml
-    /// </summary>
+    public class CompanyEventArgs : EventArgs
+    {
+        public Company Company { get; set; }
+    }
+
     public partial class DisplayCompanies : Window
     {
-        public delegate void OnCompanyDeletedEventHandler(object source, EventArgs e);
+        public delegate void OnCompanyDeletedEventHandler(object source, CompanyEventArgs e);
         public event OnCompanyDeletedEventHandler CompanyDeleted;
 
         private CompanyService _companyService;
@@ -56,12 +58,13 @@ namespace CooperationApp
                 };
 
                 _companyService.RemoveCompany(newCompany);
+
+                OnCompanyDeleted(newCompany);
             }
-            
 
             DisplayCompaniesFromDatabase();
 
-            OnCompanyDeleted();
+            
         }
         
 
@@ -79,11 +82,11 @@ namespace CooperationApp
             DisplayCompaniesFromDatabase();
         }
 
-        public virtual void OnCompanyDeleted()
+        public virtual void OnCompanyDeleted(Company company)
         {
             if (CompanyDeleted != null)
             {
-                CompanyDeleted(this, EventArgs.Empty);
+                CompanyDeleted(this, new CompanyEventArgs() { Company = company });
             }
         }
     }

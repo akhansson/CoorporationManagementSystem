@@ -45,7 +45,16 @@
             <ComboBox x:Name="companyPickerComboBox"
                       VerticalAlignment="Center"
                       Width="200"
+                      ItemsSource="{Binding Company}"
+                      SelectedValue="{Binding CompanyName, Mode=TwoWay}"
+                      DisplayMemberPath="CompanyName"
                       SelectionChanged="companyPickerComboBox_SelectionChanged"/>
+            <Button x:Name="employButton"
+                    Content="Change"
+                    Width="80"
+                    Height="20"
+                    Margin="10 5"
+                    IsEnabled="False"/>
         </StackPanel>
 
 
@@ -103,8 +112,9 @@
                   Grid.Row="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name">
-                        
+                    <GridViewColumn Header="Name"
+                                    Width="auto">
+
                     </GridViewColumn>
                 </GridView>
             </ListView.View>

@@ -34,7 +34,8 @@ namespace CooperationApp.UserControls
             _companyService = new CompanyService();
             _personService = new PersonService();
 
-            _companyService.Event.OnEvent += (object source, EventArgs e) => {
+            _companyService.Event.OnEvent += (object source, EventArgs e) =>
+            {
 
                 var evt = (EventClassArgs)e;
                 if (evt.Name == "error")
@@ -72,7 +73,7 @@ namespace CooperationApp.UserControls
                 companyNameTexbox.Text = null;
 
                 saveCompanyButton.IsEnabled = true;
-                
+
                 setCompanyAmountLabel();
 
                 PopulateCompaniesComboBox();
@@ -84,7 +85,7 @@ namespace CooperationApp.UserControls
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
+
         public void showCompaniesButton_Click(object sender, RoutedEventArgs e)
         {
             var displayCompanies = new DisplayCompanies();
@@ -111,7 +112,7 @@ namespace CooperationApp.UserControls
             try
             {
                 var selectedCompany = companyPickerComboBox.SelectedItem as Company;
-                if(selectedCompany != null)
+                if (selectedCompany != null)
                 {
                     DisplayEmployeesFromDatabase(selectedCompany);
                 }
@@ -126,13 +127,33 @@ namespace CooperationApp.UserControls
             }
         }
 
-        public void OnCompanyDeleted(object source, EventArgs e)
+        public void OnCompanyDeleted(object source, CompanyEventArgs e)
         {
             setCompanyAmountLabel();
 
-            employeeListView.ItemsSource = null;
+            var deletedCompany = e.Company;
+
+            var selectedValue = companyPickerComboBox.SelectedValue;
+
+
+            var selectedCompany = companyPickerComboBox.SelectedItem as Company;
+
             PopulateCompaniesComboBox();
 
+            if (deletedCompany != selectedCompany)
+            {
+                if (selectedCompany != null)
+                {
+                    // Jag vill motverka att bomboboxen blir tom
+                    // Jag vill att det valda objektet kvarstår
+                    //companyPickerComboBox.SelectedItem = selectedCompany;
+                    DisplayEmployeesFromDatabase(selectedCompany);
+                }
+                else
+                {
+                    employeeListView.ItemsSource = null;
+                }
+            }
         }
     }
 }
