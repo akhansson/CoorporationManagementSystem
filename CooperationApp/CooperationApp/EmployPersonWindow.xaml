@@ -25,8 +25,7 @@
                   Grid.Row="1"
                   HorizontalAlignment="Center"
                   Width="250"
-                  Margin="10"
-                  SelectionChanged="employComboBox_SelectionChanged"/>
+                  Margin="10"/>
         <Button x:Name="employButton"
                 Content="Employ"
                 Width="100"
