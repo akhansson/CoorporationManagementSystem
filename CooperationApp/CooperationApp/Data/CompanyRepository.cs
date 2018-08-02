@@ -72,7 +72,7 @@ namespace CooperationApp.Data
                 connection.CreateTable<Person>();
 
 
-                List<CompanyCount> query = connection.Query<CompanyCount>("SELECT Company.CompanyName, Person.CompanyId as Id, COUNT(Person.CompanyId) as NumberOfPersons  FROM Person inner JOIN Company ON person.CompanyId = Company.Id where Company.CompanyName is not null GROUP BY Company.CompanyName");
+                List<CompanyCount> query = connection.Query<CompanyCount>("SELECT Company.CompanyName, Person.CompanyId as Id, COUNT(Person.CompanyId) as NumberOfPersons FROM Company left JOIN Person ON person.CompanyId = Company.Id where Company.CompanyName is not null GROUP BY Company.CompanyName order by Company.CompanyName");
                 
 
 
