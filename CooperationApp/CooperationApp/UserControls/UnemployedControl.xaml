@@ -40,7 +40,7 @@
                   Grid.Row="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Unemployed"
+                    <GridViewColumn Header="Name" Width="200"
                                     DisplayMemberBinding="{Binding FullName}"/>
                 </GridView>
             </ListView.View>
