@@ -55,7 +55,16 @@ namespace CooperationApp.Data
 
                             foreach (var person in employedPeopleList)
                             {
-                                _personRepository.UnemployPerson(person.Id);
+                                connection.CreateTable<Person>();
+
+                                var selectedPerson = connection.Table<Person>().Where(p => p.Id == person.Id).ToList();
+
+                                foreach (var p in selectedPerson)
+                                {
+                                    p.CompanyId = null;
+                                }
+
+                                connection.UpdateAll(selectedPerson);
                             }
                         }
 
