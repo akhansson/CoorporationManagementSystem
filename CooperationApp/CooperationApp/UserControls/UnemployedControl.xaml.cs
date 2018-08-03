@@ -24,10 +24,12 @@ namespace CooperationApp.UserControls
     {
         
         private PersonService _personService;
+        private CompanyService _companyService;
 
         public UnemployedControl()
         {
             _personService = new PersonService();
+            _companyService = new CompanyService();
 
             InitializeComponent();
 
@@ -44,18 +46,25 @@ namespace CooperationApp.UserControls
 
         private void employButton_Click(object sender, RoutedEventArgs e)
         {
-            if (unemployedListView.SelectedIndex == -1)
-                MessageBox.Show("Select a person first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (_companyService.GetAllCompanies().Count() != 0)
+            {
+                if (unemployedListView.SelectedIndex == -1)
+                    MessageBox.Show("Select a person first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    var selectedNames = unemployedListView.SelectedItems;
+
+                    var employPersonWindow = new EmployPersonWindow(selectedNames);
+
+                    employPersonWindow.PersonEmployed += OnPersonEmployed;
+
+
+                    employPersonWindow.ShowDialog();
+                }
+            }
             else
             {
-                var selectedNames = unemployedListView.SelectedItems;
-                
-                var employPersonWindow = new EmployPersonWindow(selectedNames);
-
-                employPersonWindow.PersonEmployed += OnPersonEmployed;
-                
-
-                employPersonWindow.ShowDialog();
+                MessageBox.Show("You can't employ since there are no companies!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
