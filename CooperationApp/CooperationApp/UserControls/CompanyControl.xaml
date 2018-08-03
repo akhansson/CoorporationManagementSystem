@@ -46,12 +46,12 @@
                       VerticalAlignment="Center"
                       Width="200"
                       SelectionChanged="companyPickerComboBox_SelectionChanged"/>
-            <Button x:Name="employButton"
-                    Content="Change"
+            <Button x:Name="unemployButton"
+                    Content="Unemploy"
                     Width="80"
                     Height="20"
                     Margin="10 5"
-                    IsEnabled="False"/>
+                    Click="unemployButton_Click"/>
         </StackPanel>
 
 
@@ -110,7 +110,8 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name"
-                                    Width="200">
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding FullName}">
 
                     </GridViewColumn>
                 </GridView>

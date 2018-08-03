@@ -96,6 +96,35 @@ namespace CooperationApp.Data
             }
         }
 
+        public void UnemployPerson(int id)
+        {
+            using (var connection = DbSQLite.CreateConnection())
+            {
+                connection.BeginTransaction();
+                try
+                {
+                    connection.CreateTable<Person>();
+
+                    var selectedPerson = connection.Table<Person>().Where(p => p.Id == id).ToList();
+
+                    foreach (var p in selectedPerson)
+                    {
+                        p.CompanyId = null;
+                    }
+
+                    connection.UpdateAll(selectedPerson);
+
+                    connection.Commit();
+
+                }
+                catch (Exception)
+                {
+                    connection.Rollback();
+                    throw;
+                }
+            }
+        }
+
         public List<Person> GetAllUnemployed()
         {
             using (var personConnection = DbSQLite.CreateConnection())

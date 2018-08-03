@@ -56,7 +56,7 @@ namespace CooperationApp.UserControls
         public void DisplayEmployeesFromDatabase(Company company)
         {
             var employedPeople = _personService.GetEmployees(company);
-            employeeListView.ItemsSource = employedPeople.Select(c => c.FullName);
+            employeeListView.ItemsSource = employedPeople;
         }
 
         private async void saveCompanyButton_Click(object sender, RoutedEventArgs e)
@@ -126,6 +126,36 @@ namespace CooperationApp.UserControls
                 throw new ArgumentException();
             }
         }
+
+        private void unemployButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<Person> people = new List<Person>();
+
+            if (employeeListView.SelectedIndex == -1)
+            {
+                MessageBox.Show("Select a person first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                var selectedNames = employeeListView.SelectedItems;
+
+                foreach (var person in selectedNames)
+                {
+                    people.Add(person as Person);
+                }
+
+                foreach (var person in people)
+                {
+                    _personService.UnemployPerson(person.Id);
+                }
+
+                DisplayEmployeesFromDatabase(companyPickerComboBox.SelectedItem as Company);
+
+            }
+        }
+
+
+
 
         public void OnCompanyDeleted(object source, CompanyEventArgs e)
         {
