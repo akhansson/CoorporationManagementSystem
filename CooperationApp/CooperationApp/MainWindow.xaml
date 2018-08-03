@@ -19,8 +19,9 @@
         </Grid.RowDefinitions>
 
         <TabControl VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch">
-            
+                    HorizontalAlignment="Stretch"
+                    Background="{StaticResource headerBackgroundColor}">
+
             <TabItem Header="Person">
                 <uc:PersonControl/>
             </TabItem>

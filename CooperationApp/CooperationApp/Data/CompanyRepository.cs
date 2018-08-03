@@ -35,14 +35,12 @@ namespace CooperationApp.Data
                 {
                     connection.CreateTable<Company>();
 
-                    var persons = connection.Table<Person>().Where(p => p.CompanyId == company.Id).ToList();
-                    foreach (var person in persons)
-                    {
-                        person.CompanyId = null;
-                    }
-                    connection.UpdateAll(persons);
+                    var companies = connection.Table<Company>().Where(c => c.CompanyName == company.CompanyName).ToList();
 
-                    connection.Delete(company);
+                    foreach (var c in companies)
+                    {
+                        connection.Delete(c);
+                    }
 
                     connection.Commit();
                 }
