@@ -8,7 +8,7 @@
         Title="Employ Person" Height="210" Width="450"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -16,18 +16,25 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        
-        <Grid Background="{StaticResource headerBackgroundColor}">
+
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFBB78"/>
+                    <GradientStop Color="#FFFFFFC5" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Viewbox MaxHeight="50"
                      MinHeight="50"
                      MaxWidth="400">
                 <TextBlock x:Name="personNameLabel"
-                           FontStretch="Condensed">
-                    
+                           FontStretch="Condensed"
+                           Foreground="#FF816037">
+
                 </TextBlock>
             </Viewbox>
         </Grid>
-        
+
         <ComboBox x:Name="employComboBox"
                   Grid.Row="1"
                   HorizontalAlignment="Center"

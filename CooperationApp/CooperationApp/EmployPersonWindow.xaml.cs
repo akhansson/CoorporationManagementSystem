@@ -51,7 +51,7 @@ namespace CooperationApp
             int i = 0;
             foreach (var person in people)
             {
-                if (i == 5)
+                if (i == 4)
                 {
                     break;
                 }
@@ -60,7 +60,7 @@ namespace CooperationApp
             }
             str = str.Remove(str.Length - 2);
 
-            if (people.Count > 5)
+            if (people.Count > 4)
                 str += "...";
             
             personNameLabel.Text = str;
