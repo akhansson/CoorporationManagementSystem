@@ -42,7 +42,7 @@ namespace CooperationApp.Data
                     connection.CreateTable<Company>();
 
                     var companiesToBeDeleted = companies;
-                    
+
 
                     foreach (var company in companiesToBeDeleted)
                     {
@@ -53,24 +53,28 @@ namespace CooperationApp.Data
                         {
                             var employedPeopleList = _personRepository.GetEmployees(c);
 
-                            foreach (var person in employedPeopleList)
+                            if (employedPeopleList.Count != 0)
                             {
-                                connection.CreateTable<Person>();
-
-                                var selectedPerson = connection.Table<Person>().Where(p => p.Id == person.Id).ToList();
-
-                                foreach (var p in selectedPerson)
+                                foreach (var person in employedPeopleList)
                                 {
-                                    p.CompanyId = null;
+
+                                    connection.CreateTable<Person>();
+
+                                    var selectedPerson = connection.Table<Person>().Where(p => p.Id == person.Id).ToList();
+
+                                    foreach (var p in selectedPerson)
+                                    {
+                                        p.CompanyId = null;
+                                    }
+
+                                    connection.UpdateAll(selectedPerson);
+
                                 }
-
-                                connection.UpdateAll(selectedPerson);
                             }
+                            connection.Delete(c);
                         }
-
-                        connection.Delete(company);
                     }
-                    
+
                     connection.Commit();
                 }
                 catch (Exception)
@@ -100,7 +104,7 @@ namespace CooperationApp.Data
 
 
                 List<CompanyCount> query = connection.Query<CompanyCount>("SELECT Company.CompanyName, Person.CompanyId as Id, COUNT(Person.CompanyId) as NumberOfPersons FROM Company left JOIN Person ON person.CompanyId = Company.Id where Company.CompanyName is not null GROUP BY Company.CompanyName order by Company.CompanyName");
-                
+
 
 
                 return query;
@@ -123,8 +127,8 @@ namespace CooperationApp.Data
                     return true;
             }
         }
-        
-  
+
+
         public List<Company> SearchCompany(string searchString)
         {
             using (var connection = DbSQLite.CreateConnection())
