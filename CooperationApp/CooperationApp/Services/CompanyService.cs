@@ -43,7 +43,7 @@ namespace CooperationApp.Services
             }
         }
 
-        public void RemoveCompany(Company company)
+        public void RemoveCompany(List<Company> company)
         {
             _companyRepository.RemoveCompany(company);
         }

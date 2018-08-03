@@ -161,7 +161,7 @@ namespace CooperationApp.UserControls
         {
             setCompanyAmountLabel();
 
-            var deletedCompany = e.Company;
+            var deletedCompanies = e.Company;
 
             var selectedValue = companyPickerComboBox.SelectedValue;
 
@@ -170,20 +170,6 @@ namespace CooperationApp.UserControls
 
             PopulateCompaniesComboBox();
 
-            if (deletedCompany != selectedCompany)
-            {
-                if (selectedCompany != null)
-                {
-                    // Jag vill motverka att bomboboxen blir tom
-                    // Jag vill att det valda objektet kvarstår
-                    //companyPickerComboBox.SelectedItem = selectedCompany;
-                    DisplayEmployeesFromDatabase(selectedCompany);
-                }
-                else
-                {
-                    employeeListView.ItemsSource = null;
-                }
-            }
         }
     }
 }

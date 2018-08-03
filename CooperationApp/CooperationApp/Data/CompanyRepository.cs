@@ -12,6 +12,12 @@ namespace CooperationApp.Data
 
     public class CompanyRepository : ICompanyRepository
     {
+        private PersonRepository _personRepository;
+
+        public CompanyRepository()
+        {
+            _personRepository = new PersonRepository();
+        }
 
         public void AddCompany(Company company)
         {
@@ -26,7 +32,7 @@ namespace CooperationApp.Data
             }
         }
 
-        public void RemoveCompany(Company company)
+        public void RemoveCompany(List<Company> companies)
         {
             using (var connection = DbSQLite.CreateConnection())
             {
@@ -35,13 +41,27 @@ namespace CooperationApp.Data
                 {
                     connection.CreateTable<Company>();
 
-                    var companies = connection.Table<Company>().Where(c => c.CompanyName == company.CompanyName).ToList();
+                    var companiesToBeDeleted = companies;
+                    
 
-                    foreach (var c in companies)
+                    foreach (var company in companiesToBeDeleted)
                     {
-                        connection.Delete(c);
-                    }
+                        var companyToBeDeletedList = connection.Table<Company>().Where(c => c.CompanyName == company.CompanyName).ToList();
 
+                        // Unemploy all people in the company
+                        foreach (var c in companyToBeDeletedList)
+                        {
+                            var employedPeopleList = _personRepository.GetEmployees(c);
+
+                            foreach (var person in employedPeopleList)
+                            {
+                                _personRepository.UnemployPerson(person.Id);
+                            }
+                        }
+
+                        connection.Delete(company);
+                    }
+                    
                     connection.Commit();
                 }
                 catch (Exception)

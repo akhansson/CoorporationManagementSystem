@@ -20,7 +20,7 @@ namespace CooperationApp
 {
     public class CompanyEventArgs : EventArgs
     {
-        public Company Company { get; set; }
+        public List<Company> Company { get; set; }
     }
 
     public partial class DisplayCompanies : Window
@@ -46,21 +46,20 @@ namespace CooperationApp
         private void deleteCompanyButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedCompanies = companiesListView.SelectedItems;
-            
+
+            List<Company> companiesToDelete = new List<Company>();
+
             foreach (var c in selectedCompanies)
             {
                 var company1 = c as CompanyCount;
 
-                Company newCompany = new Company()
-                {
-                    Id = company1.Id,
-                    CompanyName = company1.CompanyName
-                };
+                companiesToDelete.Add(new Company { Id = company1.Id, CompanyName = company1.CompanyName });
 
-                _companyService.RemoveCompany(newCompany);
-
-                OnCompanyDeleted(newCompany);
             }
+
+            _companyService.RemoveCompany(companiesToDelete);
+
+            OnCompanyDeleted(companiesToDelete);
 
             DisplayCompaniesFromDatabase();
 
@@ -82,7 +81,7 @@ namespace CooperationApp
             DisplayCompaniesFromDatabase();
         }
 
-        public virtual void OnCompanyDeleted(Company company)
+        public virtual void OnCompanyDeleted(List<Company> company)
         {
             if (CompanyDeleted != null)
             {
